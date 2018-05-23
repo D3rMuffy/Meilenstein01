@@ -413,36 +413,63 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public boolean isBlockInternRowPermutation(Grid grid1, Grid grid2) {
-		boolean found = false;
-		int row = 1;
-		int permutationCounter = 0;
 		
-		while(found == false && row<10){
-			int[] rowA = grid1.getRowValues(row);
-			int[] rowB = grid2.getRowValues(row);
-			
-			if(grid1.getRowValues(row) != grid2.getRowValues(row)){
+		int simCounter = 0;
+		int minCounter = 0;
+		int aCounter = 0;
+		int bCounter = 0;
+		int aThreeRows = 0;
+		boolean answer = false;
+		
+		for(int rowA = 1; rowA < 10; rowA++){
+			aThreeRows++;
+			for(int rowB = 1; rowB < 10; rowB++){
 				
-				if(grid1.getRowValues(row) == grid2.getRowValues(row) || grid1.getRowValues(row) == grid2.getRowValues(row+1) || grid1.getRowValues(row) == grid2.getRowValues(row+2)){
-					permutationCounter++;
+				
+				int[] a1 = grid1.getRowValues(rowA);
+				int[] b1 = grid2.getRowValues(rowB);
+				
+				for(int i = 0; i < a1.length; i++){
+					if(a1[i] != -1){
+						aCounter++;
+					}
+					if(b1[i] != -1){
+						bCounter++;
+					}
+					
+					if(a1[i] == b1[i] && a1[i] != -1){
+							simCounter++;
+						}else if(a1[i] == b1[i] && a1[i] == -1){
+							minCounter++;
+						}
+					System.out.println(simCounter + " " + aCounter + " " + bCounter);
+					if(aCounter == bCounter && aCounter == simCounter && bCounter == simCounter){
+						System.out.println("HIERHEIREHRIE");
+					}else{
+						
+					}
 				}
-				if(grid1.getRowValues(row+1) == grid2.getRowValues(row) || grid1.getRowValues(row+1) == grid2.getRowValues(row+1) || grid1.getRowValues(row+1) == grid2.getRowValues(row+2)){
-					permutationCounter++;
-				}
-				if(grid1.getRowValues(row+2) == grid2.getRowValues(row) || grid1.getRowValues(row+2) == grid2.getRowValues(row+1) || grid1.getRowValues(row+2) == grid2.getRowValues(row+2)){
-					permutationCounter++;
+				if(aThreeRows == 3){
+					System.out.println("JETZT MIT: " + simCounter + " " + aCounter + " " + bCounter + " und rowA = " + rowA);
+					bCounter = bCounter/3;
+					aThreeRows = 0;
 				}
 			}
-			
-			if(permutationCounter == 3){
-				found = true;
-			}else{
-				permutationCounter = 0;
+			if(rowA %3 == 0){
+//				System.out.println(simCounter + " " + aCounter + " " + bCounter);
+				if(aCounter == bCounter && aCounter == simCounter && bCounter == simCounter){
+					answer = true;
+				}else{
+					aCounter = 0;
+					bCounter = 0;
+					simCounter = 0;
+					answer = false;
+				}
 			}
-			
-			row = row + 3;
 		}
-		return found;
+		
+		
+		return false;
 	}
 
 	public int[] getBlockInternRowPermutationImage(Grid grid1, Grid grid2, Cell anchor) {

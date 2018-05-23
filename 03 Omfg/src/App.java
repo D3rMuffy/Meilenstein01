@@ -52,6 +52,8 @@ public class App {
 
 		a.print();
 		System.out.println("");
+		b.print();
+		System.out.println("");
 		
 //		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
 //		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
@@ -63,8 +65,9 @@ public class App {
 //		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(1, 1)));
 		
-		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), image);
-		a.print();
+//		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), image);
+//		a.print();
+		
 		System.out.println("isBlockInternRowPermutation: " + abc.isBlockInternRowPermutation(a, b));
 		
 	}
