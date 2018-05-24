@@ -464,12 +464,17 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 						i++; k++;
 					}
 
+					System.out.println(simCounter);
+					
 					if (simCounter == 9) {
+//						System.out.println(simCounter);
 						permCounter++;
+						
 					}
 					simCounter = 0;
 				}
 				startwert += 9; obereGrenze += 9; counter++;
+				System.out.println("");
 			} 
 			rowAdd += 3; threeRowCounter++;
 		}
@@ -482,8 +487,96 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public int[] getBlockInternRowPermutationImage(Grid grid1, Grid grid2, Cell anchor) {
-		// TODO Auto-generated method stub
-		return null;
+		int[][] aRows = new int[27][2];
+		int[][] bRows = new int[27][2];
+		int rowsInd = 0;
+		int simCounter = 0;
+		int k = 0;
+		int counter = 0;
+		int startwert = 0;
+		int obereGrenze = 9;
+		int i = 0;
+		int emptyCounter = 0;
+		
+		int rIndex = 0;
+		int[][] perm= new int[3][3];
+		int pCol = 0;
+		int pRow = 0;
+		
+		if(anchor.getrIndex() == 1 || anchor.getrIndex() == 2 || anchor.getrIndex() == 3){
+			rIndex = 0;
+		}else if(anchor.getrIndex() == 4 || anchor.getrIndex() == 5 || anchor.getrIndex() == 6){
+			rIndex = 3;
+		}else if(anchor.getrIndex() == 7 || anchor.getrIndex() == 8 || anchor.getrIndex() == 9){
+			rIndex = 6;
+		}
+		
+		for (int m = 0; m < 3; m++) {
+			for (int n = 0; n < 9; n++) {
+				
+				aRows[rowsInd][0] = n + 1;
+				aRows[rowsInd][1] = grid1.getRowValues(rIndex+1)[n];
+
+				bRows[rowsInd][0] = n + 1;
+				bRows[rowsInd][1] = grid2.getRowValues(rIndex+1)[n];
+				rowsInd++;
+			}
+			rIndex++;
+		}
+		
+			for(int l = 0; l < 9; l++){
+				if(aRows[l][1] == -1){
+					emptyCounter++;
+				}
+				if(emptyCounter == 9){
+					counter = 4;
+				}
+			}
+			
+			while (counter < 3) {
+				k = 0;
+				while (k < 27) {
+					i = startwert;
+					while (i < obereGrenze) {
+						if (aRows[i][1] == bRows[k][1]) {
+							simCounter++;
+						}
+						i++; k++;
+					}
+					
+					if(pCol == 3){
+						pRow++;
+						pCol = 0;
+					}
+					perm[pRow][pCol] = simCounter;
+					pCol++;
+					simCounter = 0;
+				}
+				startwert += 9; obereGrenze += 9; counter++;
+			} 
+		
+		int[] image = new int[3];
+		int imageCounter = 0;
+		for(int p = 0; p < image.length; p++){
+			for(int q = 0; q < image.length; q++){
+				if(perm[p][q] == 9){
+					image[imageCounter] = q+1;
+					imageCounter++;
+				}
+			}
+		}
+		emptyCounter = 0;
+		for(int s = 0; s < image.length; s++){
+			if(image[s] == 0){
+				emptyCounter++;
+			}
+		}
+		
+		if(emptyCounter > 0){
+			return null;
+		}else{
+			return image;
+		}
 	}
 
 	public void applyRowValuePermutation(Grid grid, Cell anchor, int[] image) {

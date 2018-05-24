@@ -10,25 +10,25 @@ public class App {
 		RowUtils abc = new RowUtils();
 		int[] image = {2,3,1};
 		
-		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row2 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row1 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
+		int[] row2 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row3 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row5 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row7 = {+1,+2,+3,+4,+5,+6,+7,-1,-1};
-		int[] row8 = {+2,-1,+4,+1,-1,-1,-1,-1,-1};
-		int[] row9 = {-1,-1,-1,-1,+6,-1,+1,+7,-1};
+		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
-		int[] row11 = {-1,-1,-1,-1,+6,-1,+1,+7,-1};
-		int[] row22 = {+1,+2,+3,+4,+5,+6,+7,-1,-1};
-		int[] row33 = {+2,-1,+4,+1,-1,-1,-1,-1,-1};
+		int[] row11 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row22=  {-1,+1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row33 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row44 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row55 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row66 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row77 = {+6,-1,-1,-1,-1,-1,+1,+7,-1};
-		int[] row88 = {+1,+2,+3,+4,+5,+6,+7,-1,-1};
-		int[] row99 = {+2,-1,+4,+1,-1,-1,-1,-1,-1};
+		int[] row77 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row88 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row99 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
 		fillRow(a, 1, row1);
 		fillRow(a, 2, row2);
@@ -68,7 +68,17 @@ public class App {
 //		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), image);
 //		a.print();
 		
-		System.out.println("isBlockInternRowPermutation: " + abc.isBlockInternRowPermutation(a, b));
+//		System.out.println("isBlockInternRowPermutation: " + abc.isBlockInternRowPermutation(a, b));
+		
+		System.out.println("getBlockInternRowPermutationImage: ");
+		if(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)) == null){
+			System.out.println("null");
+		}else{
+			for(int i = 0; i < abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)).length; i++){
+		
+			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
+			}
+		}
 		
 	}
 	
