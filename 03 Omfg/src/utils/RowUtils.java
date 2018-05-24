@@ -414,119 +414,71 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 
 	public boolean isBlockInternRowPermutation(Grid grid1, Grid grid2) {
 		
-		int run = 0;
 		int[][] aRows = new int[27][2];
 		int[][] bRows = new int[27][2];
-		
-		while(run < 3){
+		int rowsInd = 0;
+		int simCounter = 0;
+		int k = 0;
+		int counter = 0;
+		int startwert = 0;
+		int obereGrenze = 9;
+		int i = 0;
+		int permCounter = 0;
+		int rowAdd = 1;
+		int threeRowCounter = 0;
+		int emptyCounter = 0;
 			
+		while (permCounter < 3 && threeRowCounter < 3) {
 			
-			// aRows[0][0] = cInd;
-			// aRows[0][1] = grid.getRValues(rowInd)[cInd];
+			rowsInd = 0; emptyCounter = 0; permCounter = 0; counter = 0;
 			
-			for(int i = 0; i < 9; i++){
-				for(int j = 0; j < 9; j++){
+			for (int m = 0; m < 3; m++) {
+				for (int n = 0; n < 9; n++) {
 					
-					aRows[j][0] = j+1;
-					aRows[j][1] = grid1.getRowValues(i+1)[j];
+					aRows[rowsInd][0] = n + 1;
+					aRows[rowsInd][1] = grid1.getRowValues(m + rowAdd)[n];
+
+					bRows[rowsInd][0] = n + 1;
+					bRows[rowsInd][1] = grid2.getRowValues(m + rowAdd)[n];
+					rowsInd++;
 				}
 			}
-			run++;
-		}
-		
-		//AUSLESEN
-		for(int i = 0; i < 27; i++){
-			for(int j = 0; j < 2; j++){
-				System.out.print(aRows[i][j]+",");
+			
+			for(int l = 0; l < 9; l++){
+				if(aRows[l][1] == -1){
+					emptyCounter++;
+				}
+				if(emptyCounter == 9){
+					counter = 4;
+				}
 			}
-			System.out.println("");
+			
+			while (counter < 3) {
+				k = 0;
+				while (k < 27) {
+					i = startwert;
+					while (i < obereGrenze) {
+						if (aRows[i][1] == bRows[k][1]) {
+							simCounter++;
+						}
+						i++; k++;
+					}
+
+					if (simCounter == 9) {
+						permCounter++;
+					}
+					simCounter = 0;
+				}
+				startwert += 9; obereGrenze += 9; counter++;
+			} 
+			rowAdd += 3; threeRowCounter++;
 		}
 		
-		return false;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		int simCounter = 0;
-//		int minCounter = 0;
-//		int aCounter = 0;
-//		int bCounter = 0;
-//		int aThreeRows = 0;
-//		boolean answer = false;
-//		int start = 1;
-//		int end = 4;
-//		
-//		for(int rowA = start; rowA < end; rowA++){
-//			aThreeRows++;
-//			for(int rowB = start; rowB < end; rowB++){
-//				
-//				
-//				int[] a1 = grid1.getRowValues(rowA);
-//				int[] b1 = grid2.getRowValues(rowB);
-//				
-//				for(int i = 0; i < a1.length; i++){
-//					if(a1[i] != -1){
-//						aCounter++;
-//					}
-//					if(b1[i] != -1){
-//						bCounter++;
-//					}
-//					
-//					if(a1[i] == b1[i] && a1[i] != -1){
-//							simCounter++;
-//						}else if(a1[i] == b1[i] && a1[i] == -1){
-//							minCounter++;
-//						}
-//					System.out.println(simCounter + " " + aCounter + " " + bCounter);
-//					if(aCounter == bCounter && aCounter == simCounter && bCounter == simCounter){
-//						System.out.println("HIERHEIREHRIE");
-//					}else{
-//						
-//					}
-//				}
-////				if(aThreeRows == 3){
-////					System.out.println("JETZT MIT: " + simCounter + " " + aCounter + " " + bCounter + " und rowA = " + rowA);
-////					bCounter = bCounter/3;
-////					aThreeRows = 0;
-////				}
-//				System.out.println("EINE B REIHE");
-//			}
-////			if(rowA %3 == 0){
-////				System.out.println(simCounter + " " + aCounter + " " + bCounter);
-////				if(aCounter == bCounter && aCounter == simCounter && bCounter == simCounter){
-////					answer = true;
-////				}else{
-////					aCounter = 0;
-////					bCounter = 0;
-////					simCounter = 0;
-////					answer = false;
-////				}
-////			}
-//			if(aThreeRows == 3){
-//				System.out.println("hier");
-//				start = start + 3;
-//				end = end + 3;
-//				aCounter = aCounter/3;
-//				aThreeRows = 0;
-//			}
-//			System.out.println("EINE A REIHE");
-//		}
-//		
-//		
-//		return false;
+		if(permCounter == 3){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public int[] getBlockInternRowPermutationImage(Grid grid1, Grid grid2, Cell anchor) {
