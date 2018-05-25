@@ -8,9 +8,10 @@ public class App {
 		Grid a = new Grid(9);
 		Grid b = new Grid(9);
 		RowUtils abc = new RowUtils();
-		int[] image = {2,3,1};
+		int[] rImage = {2,3,1};
+		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
+		int[] row1 = {+9,+8,+7,+6,+5,+4,+3,+2,+1};
 		int[] row2 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row3 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -20,7 +21,7 @@ public class App {
 		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
-		int[] row11 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row11 = {+8,+6,-1,-1,+4,+3,-1,+3,-1};
 		int[] row22=  {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row33 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row44 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -65,20 +66,27 @@ public class App {
 //		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(1, 1)));
 		
-//		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), image);
+//		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), rImage);
 //		a.print();
 		
 //		System.out.println("isBlockInternRowPermutation: " + abc.isBlockInternRowPermutation(a, b));
 		
-		System.out.println("getBlockInternRowPermutationImage: ");
-		if(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)) == null){
-			System.out.println("null");
-		}else{
-			for(int i = 0; i < abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)).length; i++){
+//		System.out.println("getBlockInternRowPermutationImage: ");
+//		if(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)) == null){
+//			System.out.println("null");
+//		}else{
+//			for(int i = 0; i < abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)).length; i++){
+//		
+//			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
+//			}
+//		}
+//		System.out.println("applyRowValuePermutation");
+//		abc.applyRowValuePermutation(a, a.getCell(1, 2), vImage);
+//		a.print();
 		
-			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
-			}
-		}
+		System.out.println("getRowValuePermutationImage: ");
+		auslesen(abc.getRowValuePermutationImage(a, b, a.getCell(1, 2)));
+		
 		
 	}
 	
@@ -89,8 +97,10 @@ public class App {
 		}
 	}
 	
-	public static void doFill(){
-		
+	public static void auslesen(int[] a){
+		for(int i = 0; i < a.length; i++){
+			System.out.print(a[i]+",");
+		}
 	}
 }
 

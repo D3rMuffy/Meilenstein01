@@ -580,13 +580,36 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public void applyRowValuePermutation(Grid grid, Cell anchor, int[] image) {
-		// TODO Auto-generated method stub
 		
+		int[] temp = new int [9];
+		int[] row = grid.getRowValues(anchor.getrIndex());
+		int number = 1;
+		
+		for(int i = 0; i <  image.length; i++){
+			for(int j = 0; j < row.length; j++){
+				if(row[j] == number){
+					temp[j] = image[i];
+				}
+			}
+			number++;
+		}
+		grid.setRowValues(anchor.getrIndex(), temp);
 	}
 
 	public int[] getRowValuePermutationImage(Grid grid1, Grid grid2, Cell anchor) {
-		// TODO Auto-generated method stub
-		return null;
+		int number = 1;
+		int[] image = new int[9];
+		
+		while(number < 10){
+			for(int i = 0; i < grid1.getRowValues(anchor.getrIndex()).length; i++){
+				if(grid1.getRowValues(anchor.getrIndex())[i] == number){
+					image[number-1] = grid2.getRowValues(anchor.getrIndex())[i];
+				}
+			}
+			number++;
+		}
+		
+		return image;
 	}
 
 	public boolean isRowValuePermutation(Grid grid1, Grid grid2, Cell anchor) {
