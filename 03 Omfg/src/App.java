@@ -11,7 +11,7 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {+9,+8,+7,+6,+5,+4,+3,+2,+1};
+		int[] row1 = {+5,+6,+7,+8,+9,+1,+2,+3,+4};
 		int[] row2 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row3 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -21,7 +21,7 @@ public class App {
 		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
-		int[] row11 = {+8,+6,-1,-1,+4,+3,-1,+3,-1};
+		int[] row11 = {+5,+6,+7,+8,+9,+1,+2,+3,+4};
 		int[] row22=  {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row33 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row44 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -98,8 +98,12 @@ public class App {
 	}
 	
 	public static void auslesen(int[] a){
-		for(int i = 0; i < a.length; i++){
-			System.out.print(a[i]+",");
+		if(a == null){
+			System.out.println("null");
+		}else{
+			for(int i = 0; i < a.length; i++){
+				System.out.print(a[i]+",");
+			}
 		}
 	}
 }

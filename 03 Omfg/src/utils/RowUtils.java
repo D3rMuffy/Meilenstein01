@@ -599,6 +599,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	public int[] getRowValuePermutationImage(Grid grid1, Grid grid2, Cell anchor) {
 		int number = 1;
 		int[] image = new int[9];
+		int noValuePermutationCounter = 0;
 		
 		while(number < 10){
 			for(int i = 0; i < grid1.getRowValues(anchor.getrIndex()).length; i++){
@@ -609,7 +610,19 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			number++;
 		}
 		
-		return image;
+		number = 1;
+		for(int i = 0; i < image.length; i++){
+			if(image[i] == number){
+				noValuePermutationCounter++;
+			}
+			number++;
+		}
+		
+		if(noValuePermutationCounter == 9){
+			return null;
+		}else{
+			return image;
+		}
 	}
 
 	public boolean isRowValuePermutation(Grid grid1, Grid grid2, Cell anchor) {
