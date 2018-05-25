@@ -21,7 +21,7 @@ public class App {
 		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
-		int[] row11 = {+5,+6,+7,+8,+9,+1,+2,+3,+4};
+		int[] row11 = {+6,+6,+7,+8,+9,+1,+2,+3,+4};
 		int[] row22=  {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row33 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row44 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -87,6 +87,8 @@ public class App {
 		System.out.println("getRowValuePermutationImage: ");
 		auslesen(abc.getRowValuePermutationImage(a, b, a.getCell(1, 2)));
 		
+		System.out.println("isRowValuePermutation: "+abc.isRowValuePermutation(a, b, a.getCell(1, 1)));
+		
 		
 	}
 	
@@ -105,6 +107,7 @@ public class App {
 				System.out.print(a[i]+",");
 			}
 		}
+		System.out.println("");
 	}
 }
 

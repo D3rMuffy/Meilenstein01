@@ -626,8 +626,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public boolean isRowValuePermutation(Grid grid1, Grid grid2, Cell anchor) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean answer = false;
+		if(getRowValuePermutationImage(grid1, grid2, grid1.getCell(anchor.getrIndex(), anchor.getrIndex())) != null){
+			answer = true;
+		}else if(getRowValuePermutationImage(grid1, grid2, grid1.getCell(anchor.getrIndex(), anchor.getrIndex())) == null){
+			answer = false;
+		}
+		return answer;
 	}
 	
 //	public List<Cell> getRowWhiteSpaces(Grid grid, Cell anchor){
