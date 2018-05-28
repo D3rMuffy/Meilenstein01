@@ -1,5 +1,7 @@
 package utils;
 
+import data.Grid;
+
 public interface GridUtil1 {
 	/**
 	* Beinhaltet Methoden bezueglich der Transposition

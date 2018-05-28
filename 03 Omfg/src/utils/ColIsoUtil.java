@@ -1,5 +1,8 @@
 package utils;
 
+import data.Cell;
+import data.Grid;
+
 public interface ColIsoUtil {
 	/**
 	* Beinhaltet hilfreiche Methoden,

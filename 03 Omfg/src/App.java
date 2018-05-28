@@ -11,7 +11,7 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {+5,+6,+7,+8,+9,+1,+2,+3,+4};
+		int[] row1 = {+5,+7,+7,+8,+9,+1,+2,+3,+4};
 		int[] row2 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row3 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -53,12 +53,12 @@ public class App {
 
 		a.print();
 		System.out.println("");
-		b.print();
-		System.out.println("");
+//		b.print();
+//		System.out.println("");
 		
-//		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
-//		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
-//		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
+		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
+		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
+		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
 //		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowWithNakedSingleCell: " + abc.getRowMinimalNakedSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(1, 1)));
@@ -84,10 +84,10 @@ public class App {
 //		abc.applyRowValuePermutation(a, a.getCell(1, 2), vImage);
 //		a.print();
 		
-		System.out.println("getRowValuePermutationImage: ");
-		auslesen(abc.getRowValuePermutationImage(a, b, a.getCell(1, 2)));
-		
-		System.out.println("isRowValuePermutation: "+abc.isRowValuePermutation(a, b, a.getCell(1, 1)));
+//		System.out.println("getRowValuePermutationImage: ");
+//		auslesen(abc.getRowValuePermutationImage(a, b, a.getCell(1, 2)));
+//		
+//		System.out.println("isRowValuePermutation: "+abc.isRowValuePermutation(a, b, a.getCell(1, 1)));
 		
 		
 	}

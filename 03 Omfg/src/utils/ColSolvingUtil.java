@@ -1,5 +1,10 @@
 package utils;
 
+import java.util.List;
+
+import data.Cell;
+import data.Grid;
+
 public interface ColSolvingUtil {
 	/**
 	* Beinhaltet hilfreiche Methoden,

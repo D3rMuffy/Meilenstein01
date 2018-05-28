@@ -1,5 +1,8 @@
 package utils;
 
+import data.Cell;
+import data.Grid;
+
 public interface GridUtil2 {
 	/**
 	* Beinhaltet Methoden bezueglich der Spiegelung

@@ -1,5 +1,7 @@
 package utils;
 
+import data.Grid;
+
 public interface GridUtil3 {
 	/**
 	* Beinhaltet Methoden bezueglich der Drehung

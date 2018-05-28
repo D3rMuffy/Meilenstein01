@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 import data.Cell;
 import data.Grid;
 
@@ -635,12 +637,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		return answer;
 	}
 	
-//	public List<Cell> getRowWhiteSpaces(Grid grid, Cell anchor){
-//		// TODO Auto-generated method stub
-//	}
-//	
-//	public List<Grid> solveRowBased(Grid grid){
-//		// TODO Auto-generated method stub
-//	}
+	public List<Cell> getRowWhiteSpaces(Grid grid, Cell anchor){
+		return null;
+	}
+
+	public List<Grid> solveRowBased(Grid grid){
+		return null;
+	}
 
 }
