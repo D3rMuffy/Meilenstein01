@@ -297,7 +297,113 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public Cell[] getRowMinimalHiddenPairCells(Grid grid, Cell anchor) {
-		// TODO Auto-generated method stub
+		
+		List<List> allLists = new LinkedList<List>();
+		int indexAllLists = 0;
+		List<Cell> Cells = new LinkedList<Cell>();
+		
+		//ermittle candidates und speichere alle candidates in eine LL namens a; speichere alle a in LL allLists
+		for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
+			for(int j = 0; j < grid.getRowValues(anchor.getrIndex()).length; j++){
+				
+				if(grid.getCell(i+1, j+1).getValue() == -1){
+					
+					List<Integer> Candidates = new LinkedList<Integer>();
+					int[] candidates = {1,2,3,4,5,6,7,8,9};
+					
+					//check Row
+					for(int k = 0; k < candidates.length; k++){
+						for(int l = 0; l < grid.getRowValues(anchor.getrIndex()).length; l++){
+							
+							if(grid.getRowValues(i+1)[l] == candidates[k]){
+								candidates[k] = 0;
+							}
+						}
+					}
+					
+					//check Col
+					for(int k = 0; k < candidates.length; k++){
+						for(int l = 0; l < grid.getColValues(anchor.getcIndex()).length; l++){
+							
+							if(grid.getColValues(j+1)[l] == candidates[k]){
+								candidates[k] = 0;
+							}
+						}
+					}
+					
+					//check Block
+					int r = 0;
+					int c = 0;
+					//row
+					if(i+1 == 1 || i+1 == 2 || i+1 == 3){
+						r = 1;
+					}else if(i+1 == 4 || i+1 == 5 || i+1 == 6){
+						r = 4;
+					}else if(i+1 == 7 || i+1 == 8 || i+1 == 9){
+						r = 7;
+					}
+					
+					//col
+					if(j+1 == 1 || j+1 == 2 || j+1 == 3){
+						c = 1;
+					}else if(j+1 == 4 || j+1 == 5 || j+1 == 6){
+						c = 4;
+					}else if(j+1 == 7 || j+1 == 8 || j+1 == 9){
+						c = 7;
+					}
+					int rStop = r+3;
+					int cStop = c+3;
+					
+					while(r < rStop){
+						while(c < cStop){
+							for(int k = 0; k < candidates.length; k++){
+								
+								if(grid.getValue(r, c) == candidates[k]){
+									candidates[k] = 0;
+								}
+							}
+							c++;							
+						}
+						r++;
+					}
+					
+					//Speichere restlichen Candidates in LLCandidates
+					for(int k = 0; k < candidates.length; k++){
+						int l = 0;
+						if(candidates[k] != 0){
+							Candidates.add(l, candidates[k]);
+							l++;
+						}
+					}
+					
+					int cellIndex = 0;
+					if(Candidates.size() == 2 && (i+1) == anchor.getrIndex()){
+						Cells.add(cellIndex, grid.getCell(i+1, j+1));
+						System.out.println("Zelle " + Cells.get(cellIndex).getrIndex() + ", " + Cells.get(cellIndex).getcIndex() + " ist Teil eines HiddenPairs");
+						cellIndex++;
+					}
+					
+					System.out.println("Zelle: " + (i+1) + "," + (j+1));
+					System.out.println(Candidates.toString());
+					
+					allLists.add(indexAllLists, Candidates);
+					indexAllLists++;
+				}
+			}
+		}
+//		List<List> compare = new LinkedList<List>();
+//		int compareIndex = 0;
+//		
+//		for(int i = 0; i < allLists.size(); i++){	
+//			if(allLists.get(i).size() == 2){
+//				compare.add(compareIndex, allLists.get(i));
+//			}	
+//		}
+//		System.out.println(compare.toString());
+		System.out.println(Cells.toString());
+//		System.out.println(allLists.toString());
+//		System.out.println(allLists.size());
+		
 		return null;
 	}
 
