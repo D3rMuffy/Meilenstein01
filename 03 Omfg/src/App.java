@@ -11,7 +11,7 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row1 = {1,2,3,4,5,6,7,-1,-1};
 		int[] row2=  {-1,-1,-1,+1,-1,-1,-1,-1,-1};
 		int[] row3 = {-1,-1,-1,-1,-1,-1,+1,-1,9};
 		int[] row4 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
@@ -77,7 +77,6 @@ public class App {
 //			System.out.println("null");
 //		}else{
 //			for(int i = 0; i < abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)).length; i++){
-//		
 //			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
 //			}
 //		}
@@ -92,8 +91,11 @@ public class App {
 		
 //		System.out.println("getRowWhiteSpaces: " + abc.getRowWhiteSpaces(a, a.getCell(1, 1)));
 		
-		System.out.println("getRowMinimalHiddenPairCells: " + abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
-		
+		System.out.println("getRowMinimalHiddenPairCells: ");
+//		for(int i = 0; i < abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)).length; i++){
+//			System.out.println(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getrIndex() + "," + abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getcIndex());
+//		}
+		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)));
 	}
 	
 	public static void fillRow(Grid grid, int row, int[] values){
@@ -112,6 +114,18 @@ public class App {
 			}
 		}
 		System.out.println("");
+	}
+	
+	public static void auslesen(Cell[] a){
+		if(a == null){
+			System.out.println("null");
+		}else{
+			for(int i = 0; i < a.length; i++){
+				System.out.print(a[i].getrIndex()+","+a[i].getcIndex());
+				System.out.println("");
+			}
+		}
+		
 	}
 }
 

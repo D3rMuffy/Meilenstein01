@@ -297,13 +297,14 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public Cell[] getRowMinimalHiddenPairCells(Grid grid, Cell anchor) {
-		
-		List<List> allLists = new LinkedList<List>();
-		int indexAllLists = 0;
-		List<Cell> Cells = new LinkedList<Cell>();
+	
+		Cell[] a = new Cell[2];
 		
 		//ermittle candidates und speichere alle candidates in eine LL namens a; speichere alle a in LL allLists
 		for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
+			List<List> allLists = new LinkedList<List>();
+			List<Cell> Cells = new LinkedList<Cell>();
+			int indexAllLists = 0;
 			for(int j = 0; j < grid.getRowValues(anchor.getrIndex()).length; j++){
 				
 				if(grid.getCell(i+1, j+1).getValue() == -1){
@@ -357,13 +358,15 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 					while(r < rStop){
 						while(c < cStop){
 							for(int k = 0; k < candidates.length; k++){
-								
+//								System.out.println("Zähle " + k);
 								if(grid.getValue(r, c) == candidates[k]){
+//									System.out.println(candidates[k]);
 									candidates[k] = 0;
 								}
 							}
 							c++;							
 						}
+						c = cStop-3;
 						r++;
 					}
 					
@@ -376,20 +379,53 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 						}
 					}
 					
-					int cellIndex = 0;
-					if(Candidates.size() == 2 && (i+1) == anchor.getrIndex()){
-						Cells.add(cellIndex, grid.getCell(i+1, j+1));
-						System.out.println("Zelle " + Cells.get(cellIndex).getrIndex() + ", " + Cells.get(cellIndex).getcIndex() + " ist Teil eines HiddenPairs");
-						cellIndex++;
-					}
+//					int cellIndex = 0;
+//					if(Candidates.size() == 2 && (i+1) == anchor.getrIndex()){
+//						Cells.add(cellIndex, grid.getCell(i+1, j+1));
+//						System.out.println("Zelle " + Cells.get(cellIndex).getrIndex() + ", " + Cells.get(cellIndex).getcIndex() + " ist Teil eines HiddenPairs");
+//						cellIndex++;
+//					}
 					
-					System.out.println("Zelle: " + (i+1) + "," + (j+1));
-					System.out.println(Candidates.toString());
+//					System.out.println("Zelle: " + (i+1) + "," + (j+1));
+//					System.out.println(Candidates.toString());
 					
+					Cells.add(indexAllLists, grid.getCell(i+1, j+1));
 					allLists.add(indexAllLists, Candidates);
 					indexAllLists++;
 				}
 			}
+			//1 REIHE DURCH
+			int[] checkNumber = {0,0,0,0,0,0,0,0,0};
+			
+			for(int j = 0; j < allLists.size(); j++){				
+				for(int number = 1; number < 10; number++){
+					for(int k = 0; k < allLists.get(j).size(); k++){
+//						System.out.println("ULUL " + allLists.get(j).get(k));
+						if((int) allLists.get(j).get(k) == number){
+							checkNumber[number-1]++;
+						}
+					}
+				}
+			}
+			int cellIndex = 0;
+			for(int j = 0; j < checkNumber.length; j++){
+				if(checkNumber[j] == 2){
+					
+					for(int k = 0; k < allLists.size(); k++){
+						for(int l = 0; l < allLists.get(k).size(); l++){
+							
+							if((int) allLists.get(k).get(l) == j){
+								a[cellIndex] = Cells.get(k);
+//								System.out.println("a["+cellIndex+"] beschrieben");
+								cellIndex++;
+							}
+						}
+					}	
+				}
+			}
+			
+//			System.out.println(allLists.toString());
+//			System.out.println(Cells.toString());			
 		}
 //		List<List> compare = new LinkedList<List>();
 //		int compareIndex = 0;
@@ -400,11 +436,22 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 //			}	
 //		}
 //		System.out.println(compare.toString());
-		System.out.println(Cells.toString());
+//		System.out.println(Cells.toString());
 //		System.out.println(allLists.toString());
 //		System.out.println(allLists.size());
+		int nullCounter = 0;
+		for(int i = 0; i < a.length; i++){
+			if(a[i] == null){
+				nullCounter++;
+			}
+		}
 		
-		return null;
+		if(nullCounter > 0){
+			return null;
+		}else{
+			return a;
+		}
+		
 	}
 
 	public boolean isRowWithNakedPairCells(Grid grid, Cell anchor) {
@@ -442,6 +489,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		
 		return answer;
 	}
+	
 
 	public Cell[] getRowMinimalNakedPairCells(Grid grid, Cell anchor) {
 		
