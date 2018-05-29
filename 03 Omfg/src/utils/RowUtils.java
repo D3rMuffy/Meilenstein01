@@ -222,20 +222,23 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 
 	public Cell getRowMinimalHiddenSingleCell(Grid grid, Cell anchor) {
 
-//		List<Integer> a = new LinkedList<Integer>();
-//		
-//		for(int i = 0; i < a.size(); i++){
-//			a.add(i, i+1);
-//		}
+		boolean foundAnswer = false;
+		int lostRow = 0;
+		int lostCol = 0;
 		
 		int[][] gridTemp = new int[8][8];
 		
 		for(int number = 1; number < 10; number++){
-			System.out.println("NUMMER: "+number);
+//			System.out.println("----------------------------");
+//			System.out.println("NUMMER " + number);
+			lostRow = 0;
+			lostCol = 0;
 			boolean nextNumber = false;
+			int rowValidCounter = 0;
 			
 			for(int reihe = 0; reihe < 9; reihe++){
-				System.out.println("REIHE: "+reihe);
+//				System.out.println("------------------------------");
+//				System.out.println("REIHE " + reihe);
 				int[] row = grid.getRowValues(reihe+1);
 				
 				for(int rInd = 0; rInd < row.length; rInd++){
@@ -249,6 +252,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 						int[] col = grid.getColValues(rInd+1);
 						for(int cCheck = 0; cCheck < col.length; cCheck++){
 							if(col[cCheck] == number){
+//								System.out.println("col[cCheck] " + col[cCheck] + " cCheck " + cCheck);
 								colCounter++;
 							}
 						}
@@ -266,13 +270,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 						int cMin = 0;
 						int cMax = 0;
 						
-						if(reihe == 1 || reihe == 2 || reihe == 3){
+						if(reihe+1 == 1 || reihe+1 == 2 || reihe+1 == 3){
 							rMin = 0;
 							rMax = 2;
-						}else if(reihe == 4 || reihe == 5 || reihe == 6){
+						}else if(reihe+1 == 4 || reihe+1 == 5 || reihe+1 == 6){
 							rMin = 3;
 							rMax = 5;
-						}else if(reihe == 7 || reihe == 8 || reihe == 9){
+						}else if(reihe+1 == 7 || reihe+1 == 8 || reihe+1 == 9){
 							rMin = 6;
 							rMax = 8;
 						}
@@ -288,24 +292,22 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 							cMax = 8;
 						}
 						
-						int[][] block = new int[3][3];
+//						System.out.println("Es wird Block " + rMin + ", " + cMin + " ausgelesen");
 						
+						int[][] block = new int[3][3];
+						int tempCMin = cMin;
 						for(int i = 0; i < block.length; i++){
 							for(int j = 0; j < block.length; j++){
 								int[] a = grid.getRowValues(rMin+1);
-								block[i][j] = a[j];
+								block[i][j] = a[cMin];
+//								System.out.print(block[i][j]);
+								cMin++;
+//								System.out.println("cMin "+cMin+" a[cMin] "+a[cMin]);
 							}
-							rMin++;
-						}
-						
-						//AUSLESEN
-//						for(int i = 0; i < block.length; i++){
-//							for(int j = 0; j < block.length; j++){
-//								System.out.print(block[i][j]+",");
-//							}
 //							System.out.println("");
-//						}
-						
+							rMin++;
+							cMin = tempCMin;
+						}						
 						//check Block auf Number
 						for(int i = 0; i < block.length; i++){
 							for(int j = 0; j < block.length; j++){
@@ -315,15 +317,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 								}
 							}
 						}
-							
-						System.out.println("cc " + colCounter + " rc " + rowCounter + " bc " + blockCounter);
-						if(blockCounter == 1 && rowCounter == 1 && colCounter == 1){
-							System.out.println("yeas");
-							//WHATEVER HAPPENS WHEN NUMBER IS VALID
-						}else{
-							nextNumber = true;
-						}
+//						System.out.println("bc " + blockCounter + " rc " + rowCounter + " cc " + colCounter);
+//						System.out.println("number " + number);
+//						System.out.println("row " + (reihe+1));
 						
+						if(blockCounter == 1 && rowCounter == 1 && colCounter == 1){
+							rowValidCounter++;
+//							System.out.println("rowValidCounter: " + rowValidCounter + " for number " + number);
+						}else{
+//							nextNumber = true;
+						}
 					}
 					if(nextNumber == true){
 						break;
@@ -333,144 +336,32 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 					break;
 				}
 			}
+			if(rowValidCounter == 8){
+//				System.out.println("rowValid for number: " + number);
+				
+				for(int i = 1; i < 10; i++){
+					int[] tempRow = grid.getRowValues(i);
+					
+					for(int j = 0; j < tempRow.length; j++){
+						if(tempRow[j] == number){							
+							lostRow += i;
+							lostCol += j+1;
+						}
+					}
+				}
+				if(grid.getCell(45-lostRow, 45-lostCol).getValue() == -1){
+//					System.out.println("MAXIMALER BREAK MIT NUMMBER " + number);
+					foundAnswer = true;
+					break;
+				}
+			}
 		}
 		
-		return null;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//BLOCK VALUES
-//		int rMin = 0;
-//		int rMax = 0;
-//		int cMin = 0;
-//		int cMax = 0;
-//		
-//		if(anchor.getrIndex() == 1 || anchor.getrIndex() == 2 || anchor.getrIndex() == 3){
-//			rMin = 0;
-//			rMax = 2;
-//		}else if(anchor.getrIndex() == 4 || anchor.getrIndex() == 5 || anchor.getrIndex() == 6){
-//			rMin = 3;
-//			rMax = 5;
-//		}else if(anchor.getrIndex() == 7 || anchor.getrIndex() == 8 || anchor.getrIndex() == 9){
-//			rMin = 6;
-//			rMax = 8;
-//		}
-//		
-//		if(anchor.getcIndex() == 1 || anchor.getcIndex() == 2 || anchor.getcIndex() == 3){
-//			cMin = 0;
-//			cMax = 2;
-//		}else if(anchor.getcIndex() == 4 || anchor.getcIndex() == 5 || anchor.getcIndex() == 6){
-//			cMin = 3;
-//			cMax = 5;
-//		}else if(anchor.getcIndex() == 7 || anchor.getcIndex() == 8 || anchor.getcIndex() == 9){
-//			cMin = 6;
-//			cMax = 8;
-//		}
-//		
-//		int[][] block = new int[3][3];
-//		
-//		for(int i = 0; i < block.length; i++){
-//			for(int j = 0; j < block.length; j++){
-//				int[] a = grid.getRowValues(rMin+1);
-//				block[i][j] = a[j];
-//			}
-//			rMin++;
-//		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		if(isRowWithHiddenSingleCell(grid, anchor) == true){
-//			int length = grid.getRowValues(anchor.getrIndex()).length;
-//			int[][] cIndRInd = new int[9][2];
-//			
-//			int row = 0;
-//			int column = 0;
-//			int number = 1;
-//			int CIRIR = 0;
-//			int cIndMin = 10;
-//			int rIndMin = 10;
-//			int nullCounter = 0;
-//			
-//			for(number = 1; number < 10; number++){
-//				for(int i = 0; i < 9; i++){
-//					for(int j = 0; j < 2; j++){
-//						cIndRInd[i][j] = 0;
-//					}
-//				}
-//				
-//				for(row = 0; row < length; row++){
-//					for(column = 0; column < length; column++){
-//						int[] rowTemp = grid.getRowValues(row+1);
-//						
-//						if(rowTemp[column] == number){
-//							cIndRInd[row][CIRIR] = row+1;
-//							System.out.println("rowTemp[col]: "+ rowTemp[column]+" mit ROW/COLUMN "+row+"/"+column+" und number: "+number);
-//							cIndRInd[row][CIRIR+1] = column+1;
-//							CIRIR = 0;							
-//						}
-//					}
-//				}
-//				
-//				System.out.println("für: "+number);
-//				for(int i = 0; i < 9; i++){
-//					for(int j = 0; j < 2; j++){
-//						System.out.print(cIndRInd[i][j]);
-//					}
-//					System.out.println("");
-//				}
-//				
-//				for(int i = 0; i < 9; i++){
-//					if(cIndRInd[i][0] == 0){
-//							nullCounter++;
-//					}
-//				}
-//				
-//				//HIER FÜR KOMPLETTE VALIDITÄT
-//				if(nullCounter == 1){
-//					for(int i = 0; i < 9; i++){
-//						for(int j = 0; j < 2; j++){
-//							
-//							if(cIndRInd[i][j] == 0 && i < rIndMin && j < cIndMin){
-//								rIndMin = i+1;
-//								cIndMin = j+1;
-//								System.out.println("rIndMin/cIndMin: "+rIndMin+"/"+cIndMin);
-//							}
-//						}
-//					}
-//				}
-//				nullCounter = 0;
-//			}
-//			return grid.getCell(rIndMin, cIndMin);
-//		}else{
-//			return null;
-//		}
+		if(foundAnswer == true && anchor.getrIndex() == 45-lostRow){
+			return grid.getCell(45-lostRow, 45-lostCol);
+		}else{
+			return null;
+		}
 	}
 	
 	public boolean isRowWithHiddenPairCells(Grid grid, Cell anchor) {
