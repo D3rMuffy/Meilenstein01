@@ -139,85 +139,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	public boolean isRowWithHiddenSingleCell(Grid grid, Cell anchor) {
-		int length = grid.getRowValues(anchor.getrIndex()).length;
-		int[][] cIndRInd = new int[9][2];
-		int[][] allMin = new int[9][2];
 		
-		for(int i = 0; i < 9; i++){
-			for(int j = 0; j < 2; j++){
-				cIndRInd[i][j] = 0;
-				allMin[i][j] = 0;
-			}
+		if(getRowMinimalHiddenSingleCell(grid, anchor) != null){
+			return true;
+		}else{
+			return false;
 		}
-		
-		int row = 0;
-		int column = 0;
-		int number = 1;
-		int CIRIR = 0;
-		int nullCounter = 0;
-		boolean answer = false;
-		
-		for(number = 1; number < 10; number++){
-			nullCounter = 0;
-			
-			for(int i = 0; i < 9; i++){
-				for(int j = 0; j < 2; j++){
-					cIndRInd[i][j] = 0;
-				}
-			}
-			
-			for(row = 0; row < length; row++){
-				for(column = 0; column < length; column++){
-					int[] rowTemp = grid.getRowValues(row+1);
-					
-					if(isValidRow(grid, anchor) == true){
-						if(rowTemp[column] == number){
-							cIndRInd[row][CIRIR] = row+1;
-//							System.out.println("rowTemp[col]: "+ rowTemp[column]+" mit ROW/COLUMN "+row+"/"+column+" und number: "+number);
-							cIndRInd[row][CIRIR+1] = column+1;
-							CIRIR = 0;
-						}
-					}
-					
-				}
-			}
-			
-			for(int i = 0; i < length; i++){
-				for(int j = 0; j < 2; j++){
-					for(int k = 0; k < length; k++){
-						for(int l = 0; l < 2; l++){
-							
-							if(cIndRInd[i][0] == cIndRInd[k][0] && cIndRInd[i][j] == cIndRInd[k][l]){
-							
-							}else if(cIndRInd[i][0] == cIndRInd[k][0] && cIndRInd[i][1] != cIndRInd[k][1] || cIndRInd[i][0] != cIndRInd[k][0] && cIndRInd[i][1] == cIndRInd[k][1]){
-								cIndRInd[i][j] = 0;
-								cIndRInd[k][l] = 0;
-							}
-						}
-					}
-				}
-			}
-			
-//			System.out.println("für: "+number);
-//			for(int i = 0; i < 9; i++){
-//				for(int j = 0; j < 2; j++){
-//					System.out.print(cIndRInd[i][j]);
-//				}
-//				System.out.println("");
-//			}
-			
-			for(int i = 0; i < cIndRInd.length; i++){
-				if(cIndRInd[i][0] == 0){
-					nullCounter++;
-				}
-			}
-			
-			if(nullCounter == 1){
-				answer = true;
-				break;
-			}
-		}
-		return answer;
 	}
 
 	public Cell getRowMinimalHiddenSingleCell(Grid grid, Cell anchor) {
