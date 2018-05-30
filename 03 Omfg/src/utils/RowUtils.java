@@ -298,7 +298,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 
 	public Cell[] getRowMinimalHiddenPairCells(Grid grid, Cell anchor) {
 	
-		Cell[] a = new Cell[2];
+		Cell[] a = new Cell[5];
 		
 		//ermittle candidates und speichere alle candidates in eine LL namens a; speichere alle a in LL allLists
 		for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
@@ -407,17 +407,20 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 					}
 				}
 			}
+			Cells.toString();
 			int cellIndex = 0;
 			for(int j = 0; j < checkNumber.length; j++){
 				if(checkNumber[j] == 2){
 					
 					for(int k = 0; k < allLists.size(); k++){
 						for(int l = 0; l < allLists.get(k).size(); l++){
-							
+//							System.out.println(k + " kleiner " + allLists.size());
+//							System.out.println(l + " kkkleiner " + allLists.get(k).size());
 							if((int) allLists.get(k).get(l) == j){
 								a[cellIndex] = Cells.get(k);
 //								System.out.println("a["+cellIndex+"] beschrieben");
 								cellIndex++;
+								System.out.println(cellIndex);
 							}
 						}
 					}	
@@ -446,7 +449,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			}
 		}
 		
-		if(nullCounter > 0){
+		if(nullCounter > 0 || anchor.getrIndex() != a[0].getrIndex() || isRowWithNakedPairCells(grid, anchor) == true){
 			return null;
 		}else{
 			return a;
