@@ -295,165 +295,268 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public int[] checkRow(int cellIndex, int[] candidateArray, Grid grid, Cell anchor){
+		int[] row = grid.getRowValues(anchor.getrIndex());
+		
+		for(int candidateArrayPointer = 0; candidateArrayPointer < candidateArray.length; candidateArrayPointer++){
+			for(int rowPointer = 0; rowPointer < row.length; rowPointer++){
+				
+				if(candidateArray[candidateArrayPointer] == row[rowPointer]){
+					candidateArray[candidateArrayPointer] = 0;
+				}
+			}
+		}
+		return candidateArray;
+	}
+	
+	public int[] checkCol(int cellIndex, int[] candidateArray, Grid grid){
+		int[] col = grid.getColValues(cellIndex);
+		
+		for(int candidateArrayPointer = 0; candidateArrayPointer < candidateArray.length; candidateArrayPointer++){
+			for(int colPointer = 0; colPointer < col.length; colPointer++){
+				
+				if(candidateArray[candidateArrayPointer] == col[colPointer]){
+					candidateArray[candidateArrayPointer] = 0;
+				}
+			}
+		}
+		return candidateArray;
+	}
+	
+	public int[] checkBlock(int cellIndex, int[] candidateArray, Grid grid, Cell anchor){
+		
+		int blockCol = cellIndex - ((cellIndex-1)%3);
+		int blockRow = anchor.getrIndex() - ((anchor.getrIndex()-1)%3);
+		
+		for(int i = blockRow; i < blockRow+3; i++){
+			for(int j = blockCol; j < blockCol+3; j++){
+				
+				for(int candidateArrayPointer = 0; candidateArrayPointer < candidateArray.length; candidateArrayPointer++){
+					if(grid.getRowValues(i)[j-1] == candidateArray[candidateArrayPointer]){
+						candidateArray[candidateArrayPointer] = 0;
+					}
+				}
+			}
+		}
+		
+		return candidateArray;
+	}
 
 	public Cell[] getRowMinimalHiddenPairCells(Grid grid, Cell anchor) {
 	
-		Cell[] a = new Cell[5];
+		List<List> allCandidates = new LinkedList<List>();
+		List<Integer> emptyCandidates = new LinkedList<Integer>();
+		emptyCandidates.add(0, 99);
 		
-		//ermittle candidates und speichere alle candidates in eine LL namens a; speichere alle a in LL allLists
-		for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
-			List<List> allLists = new LinkedList<List>();
-			List<Cell> Cells = new LinkedList<Cell>();
-			int indexAllLists = 0;
-			for(int j = 0; j < grid.getRowValues(anchor.getrIndex()).length; j++){
+		for(int cellIndex = 1; cellIndex < 10; cellIndex++){
+			int[] candidateArray = {1,2,3,4,5,6,7,8,9};
+			List<Integer> candidates = new LinkedList<Integer>();
+			
+			if(grid.getRowValues(anchor.getrIndex())[cellIndex-1] == -1){
+				candidateArray = checkRow(cellIndex, candidateArray, grid, anchor);
+				candidateArray = checkCol(cellIndex, candidateArray, grid);
+				candidateArray = checkBlock(cellIndex, candidateArray, grid, anchor);
 				
-				if(grid.getCell(i+1, j+1).getValue() == -1){
-					
-					List<Integer> Candidates = new LinkedList<Integer>();
-					int[] candidates = {1,2,3,4,5,6,7,8,9};
-					
-					//check Row
-					for(int k = 0; k < candidates.length; k++){
-						for(int l = 0; l < grid.getRowValues(anchor.getrIndex()).length; l++){
-							
-							if(grid.getRowValues(i+1)[l] == candidates[k]){
-								candidates[k] = 0;
-							}
-						}
-					}
-					
-					//check Col
-					for(int k = 0; k < candidates.length; k++){
-						for(int l = 0; l < grid.getColValues(anchor.getcIndex()).length; l++){
-							
-							if(grid.getColValues(j+1)[l] == candidates[k]){
-								candidates[k] = 0;
-							}
-						}
-					}
-					
-					//check Block
-					int r = 0;
-					int c = 0;
-					//row
-					if(i+1 == 1 || i+1 == 2 || i+1 == 3){
-						r = 1;
-					}else if(i+1 == 4 || i+1 == 5 || i+1 == 6){
-						r = 4;
-					}else if(i+1 == 7 || i+1 == 8 || i+1 == 9){
-						r = 7;
-					}
-					
-					//col
-					if(j+1 == 1 || j+1 == 2 || j+1 == 3){
-						c = 1;
-					}else if(j+1 == 4 || j+1 == 5 || j+1 == 6){
-						c = 4;
-					}else if(j+1 == 7 || j+1 == 8 || j+1 == 9){
-						c = 7;
-					}
-					int rStop = r+3;
-					int cStop = c+3;
-					
-					while(r < rStop){
-						while(c < cStop){
-							for(int k = 0; k < candidates.length; k++){
-//								System.out.println("Zähle " + k);
-								if(grid.getValue(r, c) == candidates[k]){
-//									System.out.println(candidates[k]);
-									candidates[k] = 0;
-								}
-							}
-							c++;							
-						}
-						c = cStop-3;
-						r++;
-					}
-					
-					//Speichere restlichen Candidates in LLCandidates
-					for(int k = 0; k < candidates.length; k++){
-						int l = 0;
-						if(candidates[k] != 0){
-							Candidates.add(l, candidates[k]);
-							l++;
-						}
-					}
-					
-//					int cellIndex = 0;
-//					if(Candidates.size() == 2 && (i+1) == anchor.getrIndex()){
-//						Cells.add(cellIndex, grid.getCell(i+1, j+1));
-//						System.out.println("Zelle " + Cells.get(cellIndex).getrIndex() + ", " + Cells.get(cellIndex).getcIndex() + " ist Teil eines HiddenPairs");
-//						cellIndex++;
+				int index = 0;
+				while(index < candidateArray.length){
+					candidates.add(index, candidateArray[index]);
+					index++;
+				}
+			}
+
+			if(candidates.size() == 0){
+				allCandidates.add(cellIndex-1, emptyCandidates);
+			}else if(candidates.size() != 0){
+				allCandidates.add(cellIndex-1, candidates);
+			}
+		}
+		
+		//ÜBERPRÜFE ALLE CANDIDATE LISTS AUF DOPPELT VORKOMMENDE ZAHLEN
+		
+		return null;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		Cell[] a = new Cell[2];
+//		
+//		//ermittle candidates und speichere alle candidates in eine LL namens a; speichere alle a in LL allLists
+//		for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
+//			List<List> allLists = new LinkedList<List>();
+//			List<Cell> Cells = new LinkedList<Cell>();
+//			int indexAllLists = 0;
+//			for(int j = 0; j < grid.getRowValues(anchor.getrIndex()).length; j++){
+//				
+//				if(grid.getCell(i+1, j+1).getValue() == -1){
+//					
+//					List<Integer> Candidates = new LinkedList<Integer>();
+//					int[] candidates = {1,2,3,4,5,6,7,8,9};
+//					
+//					//check Row
+//					for(int k = 0; k < candidates.length; k++){
+//						for(int l = 0; l < grid.getRowValues(anchor.getrIndex()).length; l++){
+//							
+//							if(grid.getRowValues(i+1)[l] == candidates[k]){
+//								candidates[k] = 0;
+//							}
+//						}
 //					}
-					
+//					
+//					//check Col
+//					for(int k = 0; k < candidates.length; k++){
+//						for(int l = 0; l < grid.getColValues(anchor.getcIndex()).length; l++){
+//							
+//							if(grid.getColValues(j+1)[l] == candidates[k]){
+//								candidates[k] = 0;
+//							}
+//						}
+//					}
+//					
+//					//check Block
+//					int r = 0;
+//					int c = 0;
+//					//row
+//					if(i+1 == 1 || i+1 == 2 || i+1 == 3){
+//						r = 1;
+//					}else if(i+1 == 4 || i+1 == 5 || i+1 == 6){
+//						r = 4;
+//					}else if(i+1 == 7 || i+1 == 8 || i+1 == 9){
+//						r = 7;
+//					}
+//					
+//					//col
+//					if(j+1 == 1 || j+1 == 2 || j+1 == 3){
+//						c = 1;
+//					}else if(j+1 == 4 || j+1 == 5 || j+1 == 6){
+//						c = 4;
+//					}else if(j+1 == 7 || j+1 == 8 || j+1 == 9){
+//						c = 7;
+//					}
+//					int rStop = r+3;
+//					int cStop = c+3;
+//					
+//					while(r < rStop){
+//						while(c < cStop){
+//							for(int k = 0; k < candidates.length; k++){
+////								System.out.println("Zähle " + k);
+//								if(grid.getValue(r, c) == candidates[k]){
+////									System.out.println(candidates[k]);
+//									candidates[k] = 0;
+//								}
+//							}
+//							c++;							
+//						}
+//						c = cStop-3;
+//						r++;
+//					}
+//					
+//					//Speichere restlichen Candidates in LLCandidates
+//					for(int k = 0; k < candidates.length; k++){
+//						int l = 0;
+//						if(candidates[k] != 0){
+//							Candidates.add(l, candidates[k]);
+//							l++;
+//						}
+//					}
+//					
+////					int cellIndex = 0;
+////					if(Candidates.size() == 2 && (i+1) == anchor.getrIndex()){
+////						Cells.add(cellIndex, grid.getCell(i+1, j+1));
+////						System.out.println("Zelle " + Cells.get(cellIndex).getrIndex() + ", " + Cells.get(cellIndex).getcIndex() + " ist Teil eines HiddenPairs");
+////						cellIndex++;
+////					}
+//					
 //					System.out.println("Zelle: " + (i+1) + "," + (j+1));
 //					System.out.println(Candidates.toString());
-					
-					Cells.add(indexAllLists, grid.getCell(i+1, j+1));
-					allLists.add(indexAllLists, Candidates);
-					indexAllLists++;
-				}
-			}
-			//1 REIHE DURCH
-			int[] checkNumber = {0,0,0,0,0,0,0,0,0};
-			
-			for(int j = 0; j < allLists.size(); j++){				
-				for(int number = 1; number < 10; number++){
-					for(int k = 0; k < allLists.get(j).size(); k++){
-//						System.out.println("ULUL " + allLists.get(j).get(k));
-						if((int) allLists.get(j).get(k) == number){
-							checkNumber[number-1]++;
-						}
-					}
-				}
-			}
-			Cells.toString();
-			int cellIndex = 0;
-			for(int j = 0; j < checkNumber.length; j++){
-				if(checkNumber[j] == 2){
-					
-					for(int k = 0; k < allLists.size(); k++){
-						for(int l = 0; l < allLists.get(k).size(); l++){
-//							System.out.println(k + " kleiner " + allLists.size());
-//							System.out.println(l + " kkkleiner " + allLists.get(k).size());
-							if((int) allLists.get(k).get(l) == j){
-								a[cellIndex] = Cells.get(k);
-//								System.out.println("a["+cellIndex+"] beschrieben");
-								cellIndex++;
-								System.out.println(cellIndex);
-							}
-						}
-					}	
-				}
-			}
-			
-//			System.out.println(allLists.toString());
-//			System.out.println(Cells.toString());			
-		}
-//		List<List> compare = new LinkedList<List>();
-//		int compareIndex = 0;
-//		
-//		for(int i = 0; i < allLists.size(); i++){	
-//			if(allLists.get(i).size() == 2){
-//				compare.add(compareIndex, allLists.get(i));
-//			}	
+//					
+//					Cells.add(indexAllLists, grid.getCell(i+1, j+1));
+//					allLists.add(indexAllLists, Candidates);
+//					indexAllLists++;
+//				}
+//			}
+//			//1 REIHE DURCH
+//			int[] checkNumber = {0,0,0,0,0,0,0,0,0};
+//			
+//			for(int j = 0; j < allLists.size(); j++){				
+//				for(int number = 1; number < 10; number++){
+//					for(int k = 0; k < allLists.get(j).size(); k++){
+////						System.out.println("ULUL " + allLists.get(j).get(k));
+//						if((int) allLists.get(j).get(k) == number){
+//							checkNumber[number-1]++;
+//						}
+//					}
+//				}
+//			}
+//			int cellIndex = 0;
+//			for(int j = 0; j < checkNumber.length; j++){
+//				if(checkNumber[j] == 2){
+//					
+//					for(int k = 0; k < allLists.size(); k++){
+//						for(int l = 0; l < allLists.get(k).size(); l++){
+//							if(allLists.get(k).size() < 2){
+//								k++;
+//							}else if((int) allLists.get(k).get(l) == j){
+//								if(a[0] == null || a[1] == null){
+//									a[cellIndex] = Cells.get(k);
+//									System.out.println("a["+cellIndex+"] beschrieben mit " + Cells.get(k).getrIndex() + "," + Cells.get(k).getcIndex());
+//									System.out.println(a[0]);
+//									cellIndex++;
+////									System.out.println(cellIndex);
+//								}
+//							}
+//						}
+//					}	
+//				}
+//			}
+//			
+//			if((a[0] == null && a[1] != null)||(a[0] != null && a[1] == null)){
+//				a[0] = null;
+//				a[1] = null;
+//			}
+//			
+////			System.out.println(allLists.toString());
+////			System.out.println(Cells.toString());			
 //		}
-//		System.out.println(compare.toString());
-//		System.out.println(Cells.toString());
-//		System.out.println(allLists.toString());
-//		System.out.println(allLists.size());
-		int nullCounter = 0;
-		for(int i = 0; i < a.length; i++){
-			if(a[i] == null){
-				nullCounter++;
-			}
-		}
-		
-		if(nullCounter > 0 || anchor.getrIndex() != a[0].getrIndex() || isRowWithNakedPairCells(grid, anchor) == true){
-			return null;
-		}else{
-			return a;
-		}
+////		List<List> compare = new LinkedList<List>();
+////		int compareIndex = 0;
+////		
+////		for(int i = 0; i < allLists.size(); i++){	
+////			if(allLists.get(i).size() == 2){
+////				compare.add(compareIndex, allLists.get(i));
+////			}	
+////		}
+////		System.out.println(compare.toString());
+////		System.out.println(Cells.toString());
+////		System.out.println(allLists.toString());
+////		System.out.println(allLists.size());
+//		int nullCounter = 0;
+//		for(int i = 0; i < a.length; i++){
+////			System.out.println(a[i]);
+//			if(a[i] == null){
+//				nullCounter++;
+//			}
+//		}
+//		if(nullCounter > 0 || anchor.getrIndex() != a[0].getrIndex() || isRowWithNakedPairCells(grid, anchor) == true){
+//			return null;
+//		}else{
+//			return a;
+//		}
 		
 	}
 
@@ -493,7 +596,6 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		return answer;
 	}
 	
-
 	public Cell[] getRowMinimalNakedPairCells(Grid grid, Cell anchor) {
 		
 		for(int i = 1; i < grid.getRowValues(anchor.getrIndex()).length-1; i++){
