@@ -11,15 +11,15 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row2=  {+1,-1,-1,-1,-1,+2,-1,-1,-1};
-		int[] row3 = {-1,-1,-1,+1,-1,-1,-1,-1,+2};
-		int[] row4 = {-1,-1,-1,+2,-1,-1,+1,-1,-1};
-		int[] row5 = {-1,+1,-1,-1,-1,-1,+2,-1,-1};
-		int[] row6 = {-1,+2,-1,-1,+1,-1,-1,-1,-1};
-		int[] row7 = {-1,-1,-1,-1,+2,-1,-1,+1,-1};
-		int[] row8 = {-1,-1,+1,-1,-1,-1,-1,+2,-1};
-		int[] row9 = {-1,-1,+2,-1,-1,+1,-1,-1,-1};
+		int[] row1 = {+5,+3,-1,-1,+7,-1,-1,-1,-1};
+		int[] row2=  {+6,-1,-1,+1,+9,+5,-1,-1,-1};
+		int[] row3 = {-1,+9,+8,-1,-1,-1,-1,+6,-1};
+		int[] row4 = {+8,-1,-1,-1,+6,-1,-1,-1,+3};
+		int[] row5 = {+4,-1,-1,+8,-1,+3,-1,-1,+1};
+		int[] row6 = {+7,-1,-1,-1,+2,-1,-1,-1,+6};
+		int[] row7 = {-1,+6,-1,-1,-1,-1,+2,+8,-1};
+		int[] row8 = {-1,-1,-1,+4,+1,+9,-1,-1,+5};
+		int[] row9 = {-1,-1,-1,-1,+8,-1,-1,+7,+9};
 		
 		int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row22=  {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -61,17 +61,17 @@ public class App {
 //		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
 //		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowWithNakedSingleCell: " + abc.getRowMinimalNakedSingleCell(a, a.getCell(1, 1)));
-//		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(5, 5)));
-//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(5, 1)));
-//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(5, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(5, 1)).getcIndex());
-//		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(5, 1)));
+//		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(1, 1)));
+//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)));
+//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getcIndex());
+//		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(1, 1)));
-		
+//		
 //		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), rImage);
 //		a.print();
-		
+//		
 //		System.out.println("isBlockInternRowPermutation: " + abc.isBlockInternRowPermutation(a, b));
-		
+//		
 //		System.out.println("getBlockInternRowPermutationImage: ");
 //		if(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1)) == null){
 //			System.out.println("null");
@@ -80,23 +80,21 @@ public class App {
 //			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
 //			}
 //		}
+//
 //		System.out.println("applyRowValuePermutation");
 //		abc.applyRowValuePermutation(a, a.getCell(1, 2), vImage);
 //		a.print();
-		
+//		
 //		System.out.println("getRowValuePermutationImage: ");
 //		auslesen(abc.getRowValuePermutationImage(a, b, a.getCell(1, 2)));
 //		
 //		System.out.println("isRowValuePermutation: "+abc.isRowValuePermutation(a, b, a.getCell(1, 1)));
-		
 //		System.out.println("getRowWhiteSpaces: " + abc.getRowWhiteSpaces(a, a.getCell(1, 1)));
-		
-		System.out.println("getRowMinimalHiddenPairCells: ");
-//		for(int i = 0; i < abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)).length; i++){
-//			System.out.println(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getrIndex() + "," + abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getcIndex());
-//		}
-		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
-		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
+//		
+//		System.out.println("getRowMinimalHiddenPairCells: ");
+//		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
+//		
+//		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
 	}
 	
 	public static void fillRow(Grid grid, int row, int[] values){

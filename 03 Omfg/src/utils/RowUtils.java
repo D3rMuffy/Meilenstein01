@@ -729,6 +729,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			}
 			number++;
 		}
+		
+		for(int i = 0; i < temp.length; i++){
+			if(temp[i] == 0){
+				temp[i] = -1;
+			}
+		}
 		grid.setRowValues(anchor.getrIndex(), temp);
 	}
 
