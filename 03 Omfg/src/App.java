@@ -11,15 +11,15 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {+1,+2,-1,-1,-1,-1,-1,+8,-1};
-		int[] row2=  {-1,-1,+3,+4,-1,+5,-1,-1,+9};
-		int[] row3 = {-1,-1,-1,+6,-1,-1,-1,-1,-1};
-		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row5 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row2=  {+1,-1,-1,-1,-1,+2,-1,-1,-1};
+		int[] row3 = {-1,-1,-1,+1,-1,-1,-1,-1,+2};
+		int[] row4 = {-1,-1,-1,+2,-1,-1,+1,-1,-1};
+		int[] row5 = {-1,+1,-1,-1,-1,-1,+2,-1,-1};
+		int[] row6 = {-1,+2,-1,-1,+1,-1,-1,-1,-1};
+		int[] row7 = {-1,-1,-1,-1,+2,-1,-1,+1,-1};
+		int[] row8 = {-1,-1,+1,-1,-1,-1,-1,+2,-1};
+		int[] row9 = {-1,-1,+2,-1,-1,+1,-1,-1,-1};
 		
 		int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		int[] row22=  {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -96,6 +96,7 @@ public class App {
 //			System.out.println(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getrIndex() + "," + abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1))[i].getcIndex());
 //		}
 		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
+		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
 	}
 	
 	public static void fillRow(Grid grid, int row, int[] values){
