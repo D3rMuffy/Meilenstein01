@@ -1,5 +1,6 @@
 import data.Cell;
 import data.Grid;
+import utils.GridUtils3;
 import utils.RowUtils;
 
 public class App {
@@ -8,6 +9,7 @@ public class App {
 		Grid a = new Grid(9);
 		Grid b = new Grid(9);
 		RowUtils abc = new RowUtils();
+		GridUtils3 cba = new GridUtils3();
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
@@ -50,13 +52,30 @@ public class App {
 		fillRow(b, 7, row77);
 		fillRow(b, 8, row88);
 		fillRow(b, 9, row99);
+		
+//		callRowUtils(a, b, abc);
+		callGridUtils3(a, b, cba);
+		
+	}
 
+	public static void callGridUtils3(Grid a, Grid b, GridUtils3 cba){
+		a.print();
+		System.out.println("");
+		
+		System.out.println("turnRight");
+		cba.turnRight(a);
+		
+		a.print();
+	}
+	
+		
+	public static void callRowUtils(Grid a, Grid b, RowUtils abc){
 		a.print();
 		System.out.println("");
 //		b.print();
 //		System.out.println("");
-		
-//		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
+			
+		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
 //		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
 //		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
 //		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(1, 1)));
@@ -80,7 +99,7 @@ public class App {
 //			System.out.print(abc.getBlockInternRowPermutationImage(a, b, a.getCell(1, 1))[i]);
 //			}
 //		}
-//
+//		
 //		System.out.println("applyRowValuePermutation");
 //		abc.applyRowValuePermutation(a, a.getCell(1, 2), vImage);
 //		a.print();
@@ -96,7 +115,7 @@ public class App {
 //		
 //		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
 	}
-	
+		
 	public static void fillRow(Grid grid, int row, int[] values){
 		
 		for(int i = 1; i <= values.length; i++){
