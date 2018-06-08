@@ -7,7 +7,7 @@ import data.Cell;
 import data.Grid;
 
 public class RowUtils implements RowIsoUtil, RowSolvingUtil{
-
+	
 	public boolean isValidRow(Grid grid, Cell anchor) {
 		/*
 		Entscheidet, ob in der Einheit eine zulässige Belegung vorliegt;
@@ -791,8 +791,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		}		
 		return a;
 	}
-
+	
+	
 	public List<Grid> solveRowBased(Grid grid){
+		
+		
+		
+		
 		return null;
 	}
 

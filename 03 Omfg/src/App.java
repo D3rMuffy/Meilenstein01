@@ -106,7 +106,6 @@ public class App {
 		System.out.println("getGridTurnNumber: "+cba.getGridTurnNumber(a, b));
 		System.out.println("isGridTurn: " + cba.isGridTurn(a, b));
 	}
-	
 		
 	public static void callRowUtils(Grid a, Grid b, RowUtils abc){
 		a.print();
