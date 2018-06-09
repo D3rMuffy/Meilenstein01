@@ -104,10 +104,8 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		
 		boolean answer = false;
 		
-		if(isFullHouseRow(grid, anchor) == true){
-			if(isValidRow(grid, anchor) == true){
-				answer = true;
-			}
+		if(getRowMinimalNakedSingleCell(grid, anchor) != null){
+			answer = true;
 		}else{
 			answer = false;
 		}
@@ -124,18 +122,36 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		 * Andere Fälle müssen Sie mit dieser Methode nicht abfangen.
 		 */
 		
-		int cIndex = 0;
+		updateAllCandidates(grid);
 		
-		if(isRowWithNakedSingleCell(grid, anchor) == true){
-			for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
-				if(grid.getRowValues(anchor.getrIndex())[i] == -1){
-					cIndex = i+1;
-				}
+		for(int cIndex = 0; cIndex < 9; cIndex++){
+			if(allCandidateArray[anchor.getrIndex()-1][cIndex].size() == 1){
+				return grid.getCell(anchor.getrIndex(), cIndex+1);
 			}
-		return grid.getCell(anchor.getrIndex(), cIndex);
-		}else{
-			return null;
 		}
+		
+		return  null;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		int cIndex = 0;
+//		
+//		if(isRowWithNakedSingleCell(grid, anchor) == true){
+//			for(int i = 0; i < grid.getRowValues(anchor.getrIndex()).length; i++){
+//				if(grid.getRowValues(anchor.getrIndex())[i] == -1){
+//					cIndex = i+1;
+//				}
+//			}
+//		return grid.getCell(anchor.getrIndex(), cIndex);
+//		}else{
+//			return null;
+//		}
 	}
 
 	public boolean isRowWithHiddenSingleCell(Grid grid, Cell anchor) {
@@ -443,12 +459,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		boolean answer = false;
 		
 		if(isRowWithNakedSingleCell(grid, anchor) == false && isRowWithHiddenSingleCell(grid, anchor) == false && isValidRow(grid, anchor) == true && isFullHouseRow(grid, anchor) == false){
-			
 			for(int i = 0; i < numbers.length; i++){
 				for(int j = 0; j < rowTemp.length; j++){
 					
 					if(rowTemp[j] == numbers[i]){
 						numbers[i] = 0;
+						System.out.println(rowTemp[j]);
 					}
 				}
 			}
@@ -792,13 +808,179 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		return a;
 	}
 	
+	LinkedList[][] allCandidateArray = new LinkedList[9][9];
 	
 	public List<Grid> solveRowBased(Grid grid){
 		
+		updateAllCandidates(grid);
 		
+		if(step1(grid) == true){
+			System.out.println("step1 weiter");
+			if(step2(grid) == false){
+				System.out.println("step2 weiter");
+				
+				if(step3(grid) == true){
+					System.err.println("STEP3 PASSIERT - BACK TO STEP 1");
+					solveRowBased(grid);
+				}else if(step3(grid) == false){
+					System.out.println("step3 weiter");
 		
+					if(step4(grid) == true){
+						System.err.println("STEP4 PASSIERT - BACK TO STEP 1");
+						solveRowBased(grid);
+					}else if(step4(grid) == false){
+						System.out.println("step4 weiter");
+						step5(grid);
+					}
+				}
+			}else if(step2(grid) == true){
+				System.err.println("STEP2 PASSIERT - BACK TO STEP 1");
+				solveRowBased(grid);
+			}
+		}else if(step1(grid) == false){
+				System.err.println("STEP1 STOP");
+		}
+		
+		for(int i = 0; i < allCandidateArray.length; i++){
+			for(int j = 0; j < allCandidateArray.length; j++){
+				System.out.println(allCandidateArray[i][j]);
+			}
+			System.out.println("");
+		}
+		
+		grid.print();
 		
 		return null;
+	}
+	
+	public void updateAllCandidates(Grid grid){
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){
+			for(int cIndex = 1; cIndex < 10; cIndex++){
+								
+				if(grid.getValue(rIndex, cIndex) == -1){
+					List<Integer> candidatesToFill = new LinkedList<Integer>();
+					int[] candidates = fillCandidateArray();
+										
+					candidates = checkRow(cIndex, candidates, grid, grid.getCell(rIndex, cIndex));
+					candidates = checkCol(cIndex, candidates, grid);
+					candidates = checkBlock(cIndex, candidates, grid, grid.getCell(rIndex, cIndex));					
+					
+					int ctfIndex = 0;
+					while(ctfIndex < candidates.length){
+						candidatesToFill.add(ctfIndex, candidates[ctfIndex]);
+						ctfIndex++;
+					}
+					
+					//DELETES ZEROS FROM CANDIDATELIST FOR EACH CELL
+					ctfIndex = 0;
+					while(ctfIndex < candidates.length){
+						int zero = 0;
+						candidatesToFill.remove((Integer) zero);
+						ctfIndex++;
+					}
+					
+					allCandidateArray[rIndex-1][cIndex-1] = (LinkedList) candidatesToFill;
+				}else{
+					List<Integer> fullCell = new LinkedList<Integer>();
+					fullCell.add(99);
+					fullCell.add(99);
+					allCandidateArray[rIndex-1][cIndex-1] = (LinkedList) fullCell;
+				}
+			}	
+		}	
+		
+	}
+	
+	public boolean step1(Grid grid){
+		
+		boolean answer = true;
+		int nnCounter = 0;
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){
+			if(isValidRow(grid, grid.getCell(rIndex, 1)) != true){
+				answer = false;
+			}
+			
+			for(int cIndex = 1; cIndex < 10; cIndex++){
+				if((int)(allCandidateArray[rIndex-1][cIndex-1].get(0)) == 99){
+					nnCounter++;
+				}
+			}
+		}
+		
+		if(nnCounter == 81){
+			answer = false;
+		}
+		
+		return answer;
+	}
+	
+	public boolean step2(Grid grid){
+		boolean answer = false;
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){
+			if(isFullHouseRow(grid, grid.getCell(rIndex, 1)) == true){
+				
+				for(int i = 0; i < allCandidateArray.length; i++){
+					if(allCandidateArray[rIndex-1][i].size() == 1){
+						grid.setValue(rIndex, i+1, (int) allCandidateArray[rIndex-1][i].get(0));
+						updateAllCandidates(grid);
+						answer = true;
+					}
+				}
+			}
+		}
+		
+		return answer;
+	}
+	
+	public boolean step3(Grid grid){
+		
+		boolean answer = false;
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){			
+			if(getRowMinimalNakedSingleCell(grid, grid.getCell(rIndex, 1)) != null){
+				grid.setValue(rIndex, getRowMinimalNakedSingleCell(grid, grid.getCell(rIndex, 1)).getcIndex(), (int) allCandidateArray[rIndex-1][getRowMinimalNakedSingleCell(grid, grid.getCell(rIndex, 1)).getcIndex()-1].get(0));
+				updateAllCandidates(grid);
+				answer = true;
+			}
+		}
+		return answer;
+	}
+	
+	public boolean step4(Grid grid){
+		
+		boolean answer = false;
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){
+			if(getRowMinimalHiddenSingleCell(grid, grid.getCell(rIndex, 1)) != null){
+				grid.setValue(rIndex, getRowMinimalHiddenSingleCell(grid, grid.getCell(rIndex, 1)).getcIndex(), (int) allCandidateArray[rIndex-1][getRowMinimalHiddenSingleCell(grid, grid.getCell(rIndex, 1)).getcIndex()-1].get(0));
+				updateAllCandidates(grid);
+				answer = true;
+			}
+		}
+		
+		return answer;
+	}
+	
+	public boolean step5(Grid grid){
+		
+		for(int rIndex = 1; rIndex < 10; rIndex++){
+		//NAKED PAIR IST FALSCH
+			if(getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1)) != null){
+				System.out.println("SERWE");
+			}
+		}
+		
+		return false;
+	}
+	
+	public static void auslesen(int[] a){
+		for(int i = 0; i < a.length; i++){
+			System.out.print(a[i]+",");
+		}
+		System.out.println("");
 	}
 
 }

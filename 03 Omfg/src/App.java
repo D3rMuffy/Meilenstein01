@@ -13,15 +13,15 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row2=  {-1,+2,-1,-1,-1,-1,-1,-1,-1};
-		int[] row3 = {-1,-1,+3,-1,-1,-1,-1,-1,-1};
-		int[] row4 = {-1,-1,-1,+4,-1,-1,-1,-1,-1};
-		int[] row5 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
-		int[] row6 = {-1,-1,-1,-1,-1,+6,-1,-1,-1};
-		int[] row7 = {-1,-1,-1,-1,-1,-1,+7,-1,-1};
-		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,+8,-1};
-		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,+9};
+		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
+		int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
+		int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row5 = {-1,-1,-1,-1,-1,-1,-1,+4,-1};
+		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
+		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
+		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};	
 		
 		//TWO TURN
 		int[] row11 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -33,41 +33,6 @@ public class App {
 		int[] row77 = {-1,-1,-1,-1,-1,-1,+3,-1,-1};
 		int[] row88 = {-1,-1,-1,-1,-1,-1,-1,+2,-1};
 		int[] row99 = {-1,-1,-1,-1,-1,-1,-1,-1,+1};
-//		
-//		//0 bzw 4 TURN
-//		int[] row11 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
-//		int[] row22=  {-1,+2,-1,-1,-1,-1,-1,-1,-1};
-//		int[] row33 = {-1,-1,+3,-1,-1,-1,-1,-1,-1};
-//		int[] row44 = {-1,-1,-1,+4,-1,-1,-1,-1,-1};
-//		int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
-//		int[] row66 = {-1,-1,-1,-1,-1,+6,-1,-1,-1};
-//		int[] row77 = {-1,-1,-1,-1,-1,-1,+7,-1,-1};
-//		int[] row88 = {-1,-1,-1,-1,-1,-1,-1,+8,-1};
-//		int[] row99 = {-1,-1,-1,-1,-1,-1,-1,-1,+9};
-//		
-//		//ONE TURN
-//		int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,+1};
-//		int[] row22=  {-1,-1,-1,-1,-1,-1,-1,+2,-1};
-//		int[] row33 = {-1,-1,-1,-1,-1,-1,+3,-1,-1};
-//		int[] row44 = {-1,-1,-1,-1,-1,+4,-1,-1,-1};
-//		int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
-//		int[] row66 = {-1,-1,-1,+6,-1,-1,-1,-1,-1};
-//		int[] row77 = {-1,-1,+7,-1,-1,-1,-1,-1,-1};
-//		int[] row88 = {-1,+8,-1,-1,-1,-1,-1,-1,-1};
-//		int[] row99 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
-//		
-//		//TRHEE TURN
-//		int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,+9};
-//		int[] row22=  {-1,-1,-1,-1,-1,-1,-1,+8,-1};
-//		int[] row33 = {-1,-1,-1,-1,-1,-1,+7,-1,-1};
-//		int[] row44 = {-1,-1,-1,-1,-1,+6,-1,-1,-1};
-//		int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
-//		int[] row66 = {-1,-1,-1,+4,-1,-1,-1,-1,-1};
-//		int[] row77 = {-1,-1,+3,-1,-1,-1,-1,-1,-1};
-//		int[] row88 = {-1,+2,-1,-1,-1,-1,-1,-1,-1};
-//		int[] row99 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
-		
-		
 		
 		fillRow(a, 1, row1);
 		fillRow(a, 2, row2);
@@ -89,11 +54,16 @@ public class App {
 		fillRow(b, 8, row88);
 		fillRow(b, 9, row99);
 		
-//		callRowUtils(a, b, abc);
-		callGridUtils3(a, b, cba);
+		callRowUtils(a, b, abc);
+//		callGridUtils3(a, b, cba);
+//		callSolveRowBased(a, b, abc);
 		
 	}
 
+	public static void callSolveRowBased(Grid a, Grid b, RowUtils abc){
+		abc.solveRowBased(a);
+	}
+	
 	public static void callGridUtils3(Grid a, Grid b, GridUtils3 cba){
 		a.print();
 		b.print();
@@ -113,7 +83,7 @@ public class App {
 //		b.print();
 //		System.out.println("");
 			
-		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
+//		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
 //		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
 //		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
 //		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(1, 1)));
@@ -121,8 +91,8 @@ public class App {
 //		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getcIndex());
-//		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(1, 1)));
-//		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(1, 1)));
+		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(9, 1)));
+//		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(9, 1)));
 //		
 //		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), rImage);
 //		a.print();
@@ -183,6 +153,73 @@ public class App {
 		}
 		
 	}
+	
+	
+//	//DEFAULT
+//	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row5 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	
+//	//VALIDES SUDOKU
+//	int[] row1 = {+4,+3,+5,+2,+6,+9,+7,+8,+1};
+//	int[] row2=  {+6,+8,+2,+5,+7,+1,+4,+9,+3};
+//	int[] row3 = {+1,+9,+7,+8,+3,+4,+5,+6,+2};
+//	int[] row4 = {+8,+2,+6,+1,+9,+5,+3,+4,+7};
+//	int[] row5 = {+3,+7,+4,+6,+8,+2,+9,+1,+5};
+//	int[] row6 = {+9,+5,+1,+7,+4,+3,+6,+2,+8};
+//	int[] row7 = {+5,+1,+9,+3,+2,+6,+8,+7,+4};
+//	int[] row8 = {+2,+4,+8,+9,+5,+7,+1,+3,+6};
+//	int[] row9 = {+7,+6,+3,+4,+1,+8,+2,+5,+9};
+//	
+//	//TWO TURN
+//	int[] row11 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row22=  {-1,+8,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row33 = {-1,-1,+7,-1,-1,-1,-1,-1,-1};
+//	int[] row44 = {-1,-1,-1,+6,-1,-1,-1,-1,-1};
+//	int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
+//	int[] row66 = {-1,-1,-1,-1,-1,+4,-1,-1,-1};
+//	int[] row77 = {-1,-1,-1,-1,-1,-1,+3,-1,-1};
+//	int[] row88 = {-1,-1,-1,-1,-1,-1,-1,+2,-1};
+//	int[] row99 = {-1,-1,-1,-1,-1,-1,-1,-1,+1};
+//	
+//	//0 bzw 4 TURN
+//	int[] row11 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row22=  {-1,+2,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row33 = {-1,-1,+3,-1,-1,-1,-1,-1,-1};
+//	int[] row44 = {-1,-1,-1,+4,-1,-1,-1,-1,-1};
+//	int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
+//	int[] row66 = {-1,-1,-1,-1,-1,+6,-1,-1,-1};
+//	int[] row77 = {-1,-1,-1,-1,-1,-1,+7,-1,-1};
+//	int[] row88 = {-1,-1,-1,-1,-1,-1,-1,+8,-1};
+//	int[] row99 = {-1,-1,-1,-1,-1,-1,-1,-1,+9};
+//	
+//	//ONE TURN
+//	int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,+1};
+//	int[] row22=  {-1,-1,-1,-1,-1,-1,-1,+2,-1};
+//	int[] row33 = {-1,-1,-1,-1,-1,-1,+3,-1,-1};
+//	int[] row44 = {-1,-1,-1,-1,-1,+4,-1,-1,-1};
+//	int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
+//	int[] row66 = {-1,-1,-1,+6,-1,-1,-1,-1,-1};
+//	int[] row77 = {-1,-1,+7,-1,-1,-1,-1,-1,-1};
+//	int[] row88 = {-1,+8,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row99 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
+//	
+//	//THREE TURN
+//	int[] row11 = {-1,-1,-1,-1,-1,-1,-1,-1,+9};
+//	int[] row22=  {-1,-1,-1,-1,-1,-1,-1,+8,-1};
+//	int[] row33 = {-1,-1,-1,-1,-1,-1,+7,-1,-1};
+//	int[] row44 = {-1,-1,-1,-1,-1,+6,-1,-1,-1};
+//	int[] row55 = {-1,-1,-1,-1,+5,-1,-1,-1,-1};
+//	int[] row66 = {-1,-1,-1,+4,-1,-1,-1,-1,-1};
+//	int[] row77 = {-1,-1,+3,-1,-1,-1,-1,-1,-1};
+//	int[] row88 = {-1,+2,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row99 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
 }
 
 
