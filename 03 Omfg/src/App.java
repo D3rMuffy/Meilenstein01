@@ -13,6 +13,7 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
+		//NAKED PAIR
 		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
 		int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
 		int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -21,7 +22,7 @@ public class App {
 		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
 		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
 		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};	
+		int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};		
 		
 		//TWO TURN
 		int[] row11 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -91,8 +92,8 @@ public class App {
 //		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getcIndex());
-		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(9, 1)));
-//		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(9, 1)));
+//		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(9, 1)));
+		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(9, 1)));
 //		
 //		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), rImage);
 //		a.print();
@@ -119,7 +120,7 @@ public class App {
 //		System.out.println("getRowWhiteSpaces: " + abc.getRowWhiteSpaces(a, a.getCell(1, 1)));
 //		
 //		System.out.println("getRowMinimalHiddenPairCells: ");
-//		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
+//		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)));
 //		
 //		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
 	}
@@ -143,7 +144,7 @@ public class App {
 	}
 	
 	public static void auslesen(Cell[] a){
-		if(a == null){
+		if(a[0] == null || a[1] == null){
 			System.out.println("null");
 		}else{
 			for(int i = 0; i < a.length; i++){
@@ -165,6 +166,28 @@ public class App {
 //	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	
+//	//TWO HIDDEN PAIR CELLS
+//	int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,+2};
+//	int[] row2=  {+8,-1,-1,+1,+9,+2,-1,-1,-1};
+//	int[] row3 = {+9,-1,+2,+8,-1,-1,+1,-1,-1};
+//	int[] row4 = {-1,+1,+8,-1,-1,-1,+2,-1,+9};
+//	int[] row5 = {-1,-1,+9,+2,+1,+8,-1,-1,-1};
+//	int[] row6 = {-1,+2,-1,-1,-1,+9,-1,+1,+8};
+//	int[] row7 = {-1,+8,+1,-1,+2,-1,+9,-1,-1};
+//	int[] row8 = {+2,+9,-1,-1,-1,+1,-1,+8,-1};
+//	int[] row9 = {-1,-1,-1,+9,+8,-1,-1,-1,-1};
+//			
+//	//NAKED PAIR
+//	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
+//	int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
+//	int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row5 = {-1,-1,-1,-1,-1,-1,-1,+4,-1};
+//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
+//	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
+//	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};	
 //	
 //	//VALIDES SUDOKU
 //	int[] row1 = {+4,+3,+5,+2,+6,+9,+7,+8,+1};
