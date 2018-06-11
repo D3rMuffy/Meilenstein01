@@ -14,10 +14,10 @@ public class App {
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
 		//NAKED PAIR
-		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
-		int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
-		int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row1 = {-1,-1,-1,+6,-1,-1,-1,-1,+4};
+		int[] row2=  {-1,-1,-1,+7,-1,-1,-1,-1,+5};
+		int[] row3 = {-1,-1,-1,+8,-1,-1,-1,-1,-1};
+		int[] row4 = {-1,-1,-1,+9,-1,-1,-1,-1,-1};
 		int[] row5 = {-1,-1,-1,-1,-1,-1,-1,+4,-1};
 		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
 		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
@@ -55,8 +55,9 @@ public class App {
 		fillRow(b, 8, row88);
 		fillRow(b, 9, row99);
 		
-		callRowUtils(a, b, abc);
+		
 //		callGridUtils3(a, b, cba);
+		callRowUtils(a, b, abc);
 //		callSolveRowBased(a, b, abc);
 		
 	}
@@ -67,15 +68,17 @@ public class App {
 	
 	public static void callGridUtils3(Grid a, Grid b, GridUtils3 cba){
 		a.print();
-		b.print();
+		System.out.println("");
+//		b.print();
+//		System.out.println("");
+		
+		System.out.println("turnRight");
+		cba.turnRight(a);
+		a.print();
 		System.out.println("");
 		
-//		System.out.println("turnRight");
-//		cba.turnRight(a);
-//		a.print();
-		
-		System.out.println("getGridTurnNumber: "+cba.getGridTurnNumber(a, b));
-		System.out.println("isGridTurn: " + cba.isGridTurn(a, b));
+//		System.out.println("getGridTurnNumber: "+cba.getGridTurnNumber(a, b));
+//		System.out.println("isGridTurn: " + cba.isGridTurn(a, b));
 	}
 		
 	public static void callRowUtils(Grid a, Grid b, RowUtils abc){
@@ -93,7 +96,8 @@ public class App {
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)));
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getcIndex());
 //		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(9, 1)));
-		System.out.println("getRowMinimalNakedPairCells: "+ abc.getRowMinimalNakedPairCells(a, a.getCell(9, 1)));
+//		System.out.println("getRowMinimalNakedPairCells: ");
+//		auslesen(abc.getRowMinimalNakedPairCells(a, a.getCell(9, 1)));
 //		
 //		System.out.println("applyBlockInternRowPermutation");abc.applyBlockInternRowPermutation(a, a.getCell(1, 1), rImage);
 //		a.print();

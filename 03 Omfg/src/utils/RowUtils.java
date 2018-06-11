@@ -427,68 +427,40 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	public Cell[] getRowMinimalNakedPairCells(Grid grid, Cell anchor) {
 		
 		updateAllCandidates(grid);
-		for(int i = 0; i < allCandidateArray.length; i++){
-			for(int j = 0; j < allCandidateArray.length; j++){
-				System.out.println(allCandidateArray[i][j]);
-			}
-			System.out.println("");
+		
+		Cell[] cells = new Cell[2];
+		List<Cell> candidatesTwo = new LinkedList<Cell>();
+		
+		for(int cInd = 0; cInd < allCandidateArray.length; cInd++){	
+			//NICHT NUMMER ERHÖHEN SONDERN DA WO CANDSIZE == 2 SPEICHERN UND CAND VERGLEICHEN!
+			if(allCandidateArray[anchor.getrIndex()-1][cInd].size() == 2 && (int) allCandidateArray[anchor.getrIndex()-1][cInd].get(0) != 99){
+//				System.out.println(anchor.getrIndex() + ", " + (cInd+1));
+				candidatesTwo.add(grid.getCell(anchor.getrIndex(), cInd+1));
+			}				
 		}
 		
-		
-		List<Cell> cells = new LinkedList<Cell>();
-		int[] numbers = {0,0,0,0,0,0,0,0,0};
-		
-		for(int cInd = 0; cInd < allCandidateArray.length; cInd++){
-			for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cInd].size(); candInd++){
-				
-				//NICHT NUMMER ERHÖHEN SONDERN DA WO CANDSIZE == 2 SPEICHERN UND CAND VERGLEICHEN!
-				
-				int number = (int) allCandidateArray[anchor.getrIndex()-1][cInd].get(candInd);
-				
-				if(number < 10 && number > 0){
-					numbers[number-1]++;
-					if(numbers[number-1] == 1){
-//						cellsCorrNum[number-1] = grid.getCell(anchor.getrIndex()+1, cIndex+1);
-					}else if(numbers[number-1] > 1){
-//						cellsCorrNum[number-1] = null;
-					}
+		for(int cTwoInd = 0; cTwoInd < candidatesTwo.size()-1; cTwoInd++){
+			int cand1 = 0;
+			int cand2 = 1;
+			int cellsInd = 0;
+			
+			if(allCandidateArray[candidatesTwo.get(cTwoInd).getrIndex()-1][candidatesTwo.get(cTwoInd).getcIndex()-1].get(cand1) == allCandidateArray[candidatesTwo.get(cTwoInd+1).getrIndex()-1][candidatesTwo.get(cTwoInd+1).getcIndex()-1].get(cand1)){
+				if(allCandidateArray[candidatesTwo.get(cTwoInd).getrIndex()-1][candidatesTwo.get(cTwoInd).getcIndex()-1].get(cand2) == allCandidateArray[candidatesTwo.get(cTwoInd+1).getrIndex()-1][candidatesTwo.get(cTwoInd+1).getcIndex()-1].get(cand2)){
+					
+					cells[cellsInd] = grid.getCell(candidatesTwo.get(cTwoInd).getrIndex(), candidatesTwo.get(cTwoInd).getcIndex());
+					cellsInd++;
+					cells[cellsInd] = grid.getCell(candidatesTwo.get(cTwoInd+1).getrIndex(), candidatesTwo.get(cTwoInd+1).getcIndex());
 				}
-				
 			}
 		}
 		
-		auslesen(numbers);
+//		auslesen(cells);
 		
-		return null;
-		
-		
-		
-		
-		
-		
-//		for(int i = 1; i < grid.getRowValues(anchor.getrIndex()).length-1; i++){
-//			
-//			if(isRowWithNakedPairCells(grid, grid.getCell(i, 1)) == true){
-//				
-//				int[] rowTemp = grid.getRowValues(i);
-//				int cIndex1 = 0;
-//				int cIndex2 = 0;
-//				int rIndex = 0;
-//				
-//				for(int j = 0; j < rowTemp.length; j++){
-//					if(rowTemp[j] == -1 && cIndex1 == 0 && cIndex2 == 0){
-//						cIndex1 = j+1;
-//						rIndex = i;
-//					}else if(rowTemp[j] == -1 && cIndex1 != 0 && cIndex2 == 0){
-//						cIndex2 = j+1;
-//					}
-//					
-//				}
-//				Cell[] a = {grid.getCell(rIndex, cIndex1), grid.getCell(rIndex, cIndex2)}; 
-//				return a;
-//			}
-//		}
-//		return null;
+		if(cells[0] != null && cells[1] != null){
+			return cells;
+		}else{
+			return null;
+		}
 	}
 
 	public void applyBlockInternRowPermutation(Grid grid, Cell anchor, int[] image) {
@@ -875,6 +847,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 				}
 			}	
 		}	
+		
+//		for(int i = 0; i < allCandidateArray.length; i++){
+//		for(int j = 0; j < allCandidateArray.length; j++){
+//			System.out.println(allCandidateArray[i][j]);
+//		}
+//		System.out.println("");
+//	}
 		
 	}
 	
