@@ -13,16 +13,16 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		//NAKED PAIR
-		int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
-		int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
-		int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row5 = {-1,-1,-1,-1,-1,-1,-1,+4,-1};
-		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
-		int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
-		int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};			
+		//HIDDEN SINGLE
+		int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row2=  {-1,-1,-1,+1,-1,-1,-1,-1,-1};
+		int[] row3 = {-1,-1,-1,-1,-1,-1,+1,-1,-1};
+		int[] row4 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
+		int[] row5 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
+		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+1,-1};
+		int[] row7 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
+		int[] row8 = {-1,-1,-1,-1,-1,+1,-1,-1,-1};
+		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 		
 		//TWO TURN
 		int[] row11 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -90,10 +90,10 @@ public class App {
 //		System.out.println("isValidRow: "+abc.isValidRow(a, a.getCell(1, 1)));
 //		System.out.println("hasFullHouseRow: "+abc.hasFullHouseRow(a));
 //		System.out.println("isFullHouseRow: "+abc.isFullHouseRow(a, a.getCell(1, 1)));
-//		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(1, 1)));
-//		System.out.println("getRowWithNakedSingleCell: " + abc.getRowMinimalNakedSingleCell(a, a.getCell(1, 1)));
-//		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(1, 1)));
-//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)));
+//		System.out.println("isRowWithNakedSingleCell: "+abc.isRowWithNakedSingleCell(a, a.getCell(9, 1)));
+//		System.out.println("getRowMinimalNakedSingleCell: " + abc.getRowMinimalNakedSingleCell(a, a.getCell(9, 1)).getrIndex() + "," + abc.getRowMinimalNakedSingleCell(a, a.getCell(9, 1)).getcIndex());
+//		System.out.println("isRowWithHiddenSingleCell: "+ abc.isRowWithHiddenSingleCell(a, a.getCell(9, 1)));
+//		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(9, 1)).getrIndex() + "," + abc.getRowMinimalHiddenSingleCell(a, a.getCell(9, 1)).getcIndex());
 //		System.out.println("getRowMinimalHiddenSingleCell: "+ abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getrIndex() + " " + abc.getRowMinimalHiddenSingleCell(a, a.getCell(1, 1)).getcIndex());
 //		System.out.println("isRowWithNakedPairCells: "+ abc.isRowWithNakedPairCells(a, a.getCell(9, 1)));
 //		System.out.println("getRowMinimalNakedPairCells: ");
@@ -126,7 +126,7 @@ public class App {
 //		System.out.println("getRowMinimalHiddenPairCells: ");
 //		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)));
 //		
-//		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(1, 1)));
+//		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(9, 1)));
 	}
 		
 	public static void fillRow(Grid grid, int row, int[] values){
@@ -171,6 +171,28 @@ public class App {
 //	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	
+//	//ONE HIDDEN PAIR
+//	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row2=  {-1,-1,-1,+1,-1,-1,-1,-1,-1};
+//	int[] row3 = {-1,-1,-1,-1,-1,-1,+1,-1,+9};
+//	int[] row4 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row5 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
+//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+1,+8};
+//	int[] row7 = {-1,+9,+1,-1,+8,-1,-1,-1,-1};
+//	int[] row8 = {-1,+8,-1,-1,+9,+1,-1,-1,-1};
+//	int[] row9 = {+7,+6,+5,-1,-1,-1,-1,-1,-1};	
+//	
+//	//HIDDEN SINGLE
+//	int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row2=  {-1,-1,-1,+1,-1,-1,-1,-1,-1};
+//	int[] row3 = {-1,-1,-1,-1,-1,-1,+1,-1,-1};
+//	int[] row4 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row5 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
+//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+1,-1};
+//	int[] row7 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
+//	int[] row8 = {-1,-1,-1,-1,-1,+1,-1,-1,-1};
+//	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	
 //	//TWO HIDDEN PAIR CELLS
 //	int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,+2};
 //	int[] row2=  {+8,-1,-1,+1,+9,+2,-1,-1,-1};
@@ -183,15 +205,26 @@ public class App {
 //	int[] row9 = {-1,-1,-1,+9,+8,-1,-1,-1,-1};
 //			
 //	//NAKED PAIR
+//	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row2=  {-1,-1,-1,-1,-1,+1,-1,-1,-1};
+//	int[] row3 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
+//	int[] row4 = {-1,-1,-1,-1,-1,-1,-1,+1,-1};
+//	int[] row5 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
+//	int[] row6 = {-1,+1,-1,-1,-1,+8,-1,-1,-1};
+//	int[] row7 = {-1,-1,-1,-1,-1,-1,+1,-1,-1};
+//	int[] row8 = {-1,-1,-1,+1,+7,-1,+2,-1,-1};
+//	int[] row9 = {+1,+2,+3,+4,+5,+6,+9,-1,-1};
+//	
+//	//NAKED SINGLE
 //	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,+4};
 //	int[] row2=  {-1,-1,-1,-1,-1,-1,-1,-1,+5};
-//	int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row3 = {-1,-1,-1,-1,-1,-1,-1,-1,+6};
 //	int[] row4 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-//	int[] row5 = {-1,-1,-1,-1,-1,-1,-1,+4,-1};
-//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+5,-1};
-//	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+9,+8};
+//	int[] row5 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row6 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,+8,+9};
 //	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-//	int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};	
+//	int[] row9 = {+1,+2,+3,-1,-1,-1,-1,-1,-1};
 //	
 //	//VALIDES SUDOKU
 //	int[] row1 = {+4,+3,+5,+2,+6,+9,+7,+8,+1};
