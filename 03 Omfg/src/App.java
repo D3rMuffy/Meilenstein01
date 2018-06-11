@@ -57,8 +57,8 @@ public class App {
 		
 		
 //		callGridUtils3(a, b, cba);
-		callRowUtils(a, b, abc);
-//		callSolveRowBased(a, b, abc);
+//		callRowUtils(a, b, abc);
+		callSolveRowBased(a, b, abc);
 		
 	}
 

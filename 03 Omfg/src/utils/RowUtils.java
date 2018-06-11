@@ -394,34 +394,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		 * Die Einheit wird durch anchor eindeutig festgelegt. 
 		 */
 		
-		int[] rowTemp = grid.getRowValues(anchor.getrIndex());
-		int[] numbers = {1,2,3,4,5,6,7,8,9};
-		int nullCounter = 0;
-		boolean answer = false;
-		
-		if(isRowWithNakedSingleCell(grid, anchor) == false && isRowWithHiddenSingleCell(grid, anchor) == false && isValidRow(grid, anchor) == true && isFullHouseRow(grid, anchor) == false){
-			for(int i = 0; i < numbers.length; i++){
-				for(int j = 0; j < rowTemp.length; j++){
-					
-					if(rowTemp[j] == numbers[i]){
-						numbers[i] = 0;
-						System.out.println(rowTemp[j]);
-					}
-				}
-			}
-			
-			for(int i = 0; i < numbers.length; i++){
-				if(numbers[i] != 0){
-					nullCounter++;
-				}
-			}
-			
-			if(nullCounter == 2){
-				answer = true;
-			}
+		if(getRowMinimalNakedPairCells(grid,anchor) != null){
+			return true;
+		}else{
+			return false;
 		}
-		
-		return answer;
 	}
 	
 	public Cell[] getRowMinimalNakedPairCells(Grid grid, Cell anchor) {
