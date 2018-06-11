@@ -739,38 +739,60 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	LinkedList[][] allCandidateArray = new LinkedList[9][9];
+	boolean updateChangedSomething = false;
+	int[] foundNakedRow = {0,0,0,0,0,0,0,0,0};
+	boolean deleteCandidates = false;
+	LinkedList[] deleteCandidatesfromCell = new LinkedList[9];
+	
 	
 	public List<Grid> solveRowBased(Grid grid){
 		
-		updateAllCandidates(grid);
+		if(updateChangedSomething == false){
+			System.out.println("NEU INITIALISIERT");
+			updateAllCandidates(grid);
+		}
+		System.out.println("BEGINNING");
+		auslesen(allCandidateArray);
 		
-		if(step1(grid) == true){
-			System.out.println("step1 weiter");
-			if(step2(grid) == false){
-				System.out.println("step2 weiter");
-				
-				if(step3(grid) == true){
-					System.err.println("STEP3 PASSIERT - BACK TO STEP 1");
-					solveRowBased(grid);
-				}else if(step3(grid) == false){
-					System.out.println("step3 weiter");
-		
-					if(step4(grid) == true){
-						System.err.println("STEP4 PASSIERT - BACK TO STEP 1");
+		boolean step1 = step1(grid);
+		if(step1 == true){
+			System.out.println("step 1 weiter");
+			boolean step2 = step2(grid);
+			if(step2 == false){
+				System.out.println("step 2 weiter");
+				boolean step3 = step3(grid);
+				if(step3 == false){
+					System.out.println("step 3 weiter");
+					boolean step4 = step4(grid);
+					if(step4 == false){
+						System.out.println("Step 4 weiter");
+						boolean step5 = step5(grid);
+						if(step5 == false){
+							System.out.println("Step 5 weiter");
+							
+							
+						}else if(step5 == true){
+							System.err.println("STEP 5 PASSIERT - BACK TO STEP 1");
+							solveRowBased(grid);
+						}
+					}else if(step4 == true){
+						System.err.println("STEP 4 PASSIERT - BACK TO STEP 1");
 						solveRowBased(grid);
-					}else if(step4(grid) == false){
-						System.out.println("step4 weiter");
-						step5(grid);
 					}
+				}else if(step3 == true){
+					System.err.println("STEP 3 PASSIERT - BACK TO STEP 1");
+					solveRowBased(grid);
 				}
-			}else if(step2(grid) == true){
-				System.err.println("STEP2 PASSIERT - BACK TO STEP 1");
+			}else if(step2 == true){
+				System.err.println("STEP 2 PASSIERT - BACK TO STEP 1");
 				solveRowBased(grid);
 			}
-		}else if(step1(grid) == false){
-				System.err.println("STEP1 STOP");
+		}else if(step1 == false){
+			System.err.println("STEP 1 STOP");
+			solveRowBased(grid);
 		}
 		
+		System.out.println("NACH ALLEN STEPS");
 		for(int i = 0; i < allCandidateArray.length; i++){
 			for(int j = 0; j < allCandidateArray.length; j++){
 				System.out.println(allCandidateArray[i][j]);
@@ -778,6 +800,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			System.out.println("");
 		}
 		
+		System.out.println("DAS FERTIGE GRID");
 		grid.print();
 		
 		return null;
@@ -825,12 +848,32 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			}	
 		}	
 		
+		if(deleteCandidates == true){
+			
+			for(int dCfCInd = 0; dCfCInd < deleteCandidatesfromCell.length; dCfCInd++){
+				
+				if(deleteCandidatesfromCell[dCfCInd] != null){
+					
+					int CtDfIndex = 0;
+					while(CtDfIndex < deleteCandidatesfromCell[dCfCInd].size()){
+						
+						Cell a = (Cell) deleteCandidatesfromCell[dCfCInd].get(CtDfIndex);
+//						System.out.println(allCandidateArray[a.getrIndex()-1][a.getcIndex()-1].toString());
+						allCandidateArray[a.getrIndex()-1][a.getcIndex()-1].remove((Integer) (dCfCInd+1));
+						
+						CtDfIndex++;
+					}
+						
+				}
+			}
+		}
+		
 //		for(int i = 0; i < allCandidateArray.length; i++){
-//		for(int j = 0; j < allCandidateArray.length; j++){
-//			System.out.println(allCandidateArray[i][j]);
+//			for(int j = 0; j < allCandidateArray.length; j++){
+//				System.out.println(allCandidateArray[i][j]);
+//			}
+//			System.out.println("");
 //		}
-//		System.out.println("");
-//	}
 		
 	}
 	
@@ -880,6 +923,149 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		
 		return candidateArray;
 	}
+	
+	public LinkedList[][] updateRow(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
+		int changeCounter = 0;
+		
+		for(int cIndex = 0; cIndex < aca.length; cIndex++){
+			for(int candIndex = 0; candIndex < aca[a.getrIndex()-1][cIndex].size(); candIndex++){
+					
+				if((int) aca[a.getrIndex()-1][cIndex].get(candIndex) == cand1 || (int) aca[a.getrIndex()-1][cIndex].get(candIndex) == cand2){
+					
+					if(aca[a.getrIndex()-1][cIndex] != aca[a.getrIndex()-1][a.getcIndex()-1] && aca[a.getrIndex()-1][cIndex] != aca[b.getrIndex()-1][b.getcIndex()-1]){
+						changeCounter++;
+	//					System.out.println("ChangeCounter: " + changeCounter + " bei aca["+(a.getrIndex()-1)+"]["+cIndex+"]");
+						aca[a.getrIndex()-1][cIndex].remove((Integer) cand1);
+						aca[a.getrIndex()-1][cIndex].remove((Integer) cand2);
+						
+						deleteCandidates = true;
+						cellsToDeleteFrom.add(grid.getCell(a.getrIndex(), cIndex+1));
+					}
+				}
+			}
+		}
+//		System.out.println("Row: " + changeCounter);
+		if(changeCounter > 0){
+			updateChangedSomething = true;
+		}
+		return aca;
+	}
+	
+	public LinkedList[][] updateCol(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
+		
+		int changeCounter = 0;
+		
+		for(int rIndex = 0; rIndex < aca.length; rIndex++){
+			for(int candIndex = 0; candIndex < aca[rIndex][a.getcIndex()-1].size(); candIndex++){
+				
+				if((int) aca[rIndex][a.getcIndex()-1].get(candIndex) == cand1 || (int) aca[rIndex][a.getcIndex()-1].get(candIndex) == cand2){
+					if(aca[rIndex][a.getcIndex()-1] != aca[a.getrIndex()-1][a.getcIndex()-1] && aca[rIndex][a.getcIndex()-1] != aca[b.getrIndex()-1][b.getcIndex()-1]){	
+						changeCounter++;
+						
+						aca[rIndex][a.getcIndex()-1].remove((Integer) cand1);
+						aca[rIndex][a.getcIndex()-1].remove((Integer) cand2);
+						deleteCandidates = true;
+						cellsToDeleteFrom.add(grid.getCell(rIndex+1, a.getcIndex()));
+					}
+				}
+			}
+//			System.out.println("Col 1: " + changeCounter);
+			if(changeCounter > 0){
+				updateChangedSomething = true;
+			}
+			changeCounter = 0;
+			
+			for(int candIndex = 0; candIndex < aca[rIndex][b.getcIndex()-1].size(); candIndex++){
+				
+				if((int) aca[rIndex][b.getcIndex()-1].get(candIndex) == cand1 || (int) aca[rIndex][b.getcIndex()-1].get(candIndex) == cand2){
+					if(aca[rIndex][b.getcIndex()-1] != aca[a.getrIndex()-1][a.getcIndex()-1] && aca[rIndex][b.getcIndex()-1] != aca[b.getrIndex()-1][b.getcIndex()-1]){	
+						changeCounter++;
+						
+						aca[rIndex][b.getcIndex()-1].remove((Integer) cand1);
+						aca[rIndex][b.getcIndex()-1].remove((Integer) cand2);
+						deleteCandidates = true;
+						cellsToDeleteFrom.add(grid.getCell(rIndex+1, b.getcIndex()));
+					}	
+				}
+			}
+		}
+//		System.out.println("Col 2: " + changeCounter);
+		if(changeCounter > 0){
+			updateChangedSomething = true;
+		}
+		return aca;
+	}
+	
+	public LinkedList[][] updateBlock(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
+		
+		int blockCol = (a.getcIndex() - ((a.getcIndex()-1)%3))-1;
+		int blockRow = (a.getrIndex() - ((a.getrIndex()-1)%3))-1;
+//		System.out.println(blockCol);
+//		System.out.println(blockRow);
+		
+		int changeCounter = 0;
+		
+		for(int i = blockRow; i < blockRow+3; i++){
+			for(int j = blockCol; j < blockCol+3; j++){	
+//				System.out.println(i + " " + j);
+				for(int candInd = 0; candInd < aca[i][j].size(); candInd++){
+				
+					if((int) aca[i][j].get(candInd) == cand1 || (int) aca[i][j].get(candInd) == cand2){
+						if(aca[i][j] != aca[a.getrIndex()-1][a.getcIndex()-1] && aca[i][j] != aca[b.getrIndex()-1][b.getcIndex()-1]){	
+							changeCounter++;
+	//						System.out.println("aca["+i+"]["+j+"]");
+							aca[i][j].remove((Integer) cand1);
+	//						System.out.println("1. Removed " + cand1 + " bei aca["+i+"][" + j + "]");
+							aca[i][j].remove((Integer) cand2);
+	//						System.out.println("1. Removed " + cand2 + " bei aca["+i+"][" + j + "]");
+							
+	//						System.out.println(aca[i][j].toString());
+							deleteCandidates = true;
+							cellsToDeleteFrom.add(grid.getCell(i+1, j+1));
+						}
+					}
+				}
+			}
+		}
+		
+//		auslesen(aca);
+//		System.out.println("Block 1: " + changeCounter);
+		if(changeCounter > 0){
+			updateChangedSomething = true;
+		}
+		changeCounter = 0;
+		
+		blockCol = (b.getcIndex() - ((b.getcIndex()-1)%3))-1;
+		blockRow = (b.getrIndex() - ((b.getrIndex()-1)%3))-1;
+		
+		for(int i = blockRow; i < blockRow+3; i++){
+			for(int j = blockCol; j < blockCol+3; j++){
+				for(int candInd = 0; candInd < aca[i][j].size(); candInd++){
+				
+					if((int) aca[i][j].get(candInd) == cand1 || (int) aca[i][j].get(candInd) == cand2){
+						if(aca[i][j] != aca[a.getrIndex()-1][a.getcIndex()-1] && aca[i][j] != aca[b.getrIndex()-1][b.getcIndex()-1]){
+							changeCounter++;
+						
+							aca[i][j].remove((Integer) cand1);
+	//						System.out.println("2. Removed " + cand2 + " bei aca["+i+"][" + j + "]");
+							aca[i][j].remove((Integer) cand2);
+	//						System.out.println("2. Removed " + cand2 + " bei aca["+i+"][" + j + "]");
+							deleteCandidates = true;
+							cellsToDeleteFrom.add(grid.getCell(i+1, j+1));
+						}
+					}
+				}
+			}
+		}
+//		System.out.println("Block 2: " + changeCounter);
+		if(changeCounter > 0){
+			updateChangedSomething = true;
+		}
+		changeCounter = 0;
+		
+		return aca;
+	}
+	
 	
 	public int[] fillCandidateArray(){
 		int[] a = {1,2,3,4,5,6,7,8,9};
@@ -959,14 +1145,66 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	public boolean step5(Grid grid){
+				
+		updateChangedSomething = false;
+//		System.out.println("ANFANG " + updateChangedSomething);
 		
 		for(int rIndex = 1; rIndex < 10; rIndex++){
-		//NAKED PAIR IST FALSCH
 			if(getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1)) != null){
-				System.out.println("SERWE");
+				
+				if(foundNakedRow[rIndex-1] == 0){
+					foundNakedRow[rIndex-1]++;
+					
+//					System.err.println("FOUND WITH " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getrIndex() + ", " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getcIndex());
+//					System.err.println("FOUND WITH " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[1].getrIndex() + ", " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[1].getcIndex());
+			
+//					System.out.println(getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getrIndex() + " " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getcIndex());
+//					System.out.println(getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[1].getrIndex() + " " + getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[1].getcIndex());
+			
+					Cell first = getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0];
+					Cell second = getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[1];
+					int cand1 = (int) allCandidateArray[getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getrIndex()-1][getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getcIndex()-1].get(0);
+					int cand2 = (int) allCandidateArray[getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getrIndex()-1][getRowMinimalNakedPairCells(grid, grid.getCell(rIndex, 1))[0].getcIndex()-1].get(1);
+					LinkedList[][] allCandidateArrayTemp = new LinkedList[9][9];
+									
+					allCandidateArrayTemp = allCandidateArray;
+					List<Cell> cellsToDeleteFrom = new LinkedList<Cell>();
+			
+					allCandidateArrayTemp = updateRow(first, second, cand1, cand2, allCandidateArrayTemp, grid, cellsToDeleteFrom);
+//					System.out.println(updateChangedSomething);
+					allCandidateArrayTemp = updateCol(first, second, cand1, cand2, allCandidateArrayTemp, grid, cellsToDeleteFrom);
+//					System.out.println(updateChangedSomething);
+					allCandidateArrayTemp = updateBlock(first, second, cand1, cand2, allCandidateArrayTemp, grid, cellsToDeleteFrom);
+//					System.out.println(updateChangedSomething);
+					
+//					System.out.println("cellsToDeleteFrom: " + cellsToDeleteFrom.toString());
+					
+					deleteCandidatesfromCell[cand1-1] = (LinkedList) cellsToDeleteFrom;
+					deleteCandidatesfromCell[cand2-1] = (LinkedList) cellsToDeleteFrom;
+					
+//					System.out.print("deleteCandidatesfromCell: ");
+//					auslesen(deleteCandidatesfromCell);
+					
+//					Cell a = (Cell) deleteCandidatesfromCell[5].get(0);
+//					System.out.println(a.getrIndex());
+//					System.out.println(cellsToDeleteFrom.get(0).getrIndex());
+					
+//					System.err.println("TEMP");
+//					for(int i = 0; i < allCandidateArrayTemp.length; i++){
+//						for(int j = 0; j < allCandidateArrayTemp.length; j++){
+//							System.out.println(allCandidateArrayTemp[i][j]);
+//						}
+//					System.out.println("");
+//					}
+		
+					if(updateChangedSomething == true){
+//						System.out.println("END1E " + updateChangedSomething);
+						allCandidateArray = allCandidateArrayTemp;
+						return true;
+					}
+				}
 			}
 		}
-		
 		return false;
 	}
 	
@@ -982,6 +1220,22 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			System.out.print(a[i]+",");
 		}
 		System.out.println("");
+	}
+	
+	public static void auslesen(LinkedList[] a){
+		for(int i = 0; i < a.length; i++){
+			System.out.print(a[i]+",");
+		}
+		System.out.println("");
+	}
+	
+	public static void auslesen(LinkedList[][] a){
+		for(int i = 0; i < a.length; i++){
+			for(int j = 0; j < a.length; j++){
+				System.out.println(a[i][j]);
+			}
+		System.out.println("");
+		}
 	}
 
 }
