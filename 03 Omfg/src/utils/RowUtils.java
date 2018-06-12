@@ -783,7 +783,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	 *   
 	 * @param grid Das Sudoku, auf dem die white Spaces ermittelt werden sollen.
 	 * @param anchor Ankerzelle auf der ermittelt wird, ob grid2 aus grid1 entstanden ist
-	 * @return List<Cell> List, die die Zellen die nicht belegt sind, zurueckgibt. Leer, falls es solche Zellen nicht gibt.
+	 * @return List von Zellen List, die die Zellen die nicht belegt sind, zurueckgibt. Leer, falls es solche Zellen nicht gibt.
 	 */
 	public List<Cell> getRowWhiteSpaces(Grid grid, Cell anchor){
 		List<Cell> a = new LinkedList <Cell>();
@@ -817,7 +817,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	 *   die Zellen entsprechend. Gibt eine Liste der Grids zurueck, die nach jeder Zellenveraenderung entstanden sind. 
 	 *   
 	 * @param grid Das Sudoku, auf dem die Methoden angewandt werden, um es zu loesen.
-	 * @return List<Grid> List, die die Grids die nach jeder Zellenveraenderung entstanden sind, wiedergibt.
+	 * @return List von Grids List, die die Grids die nach jeder Zellenveraenderung entstanden sind, wiedergibt.
 	 */
 	public List<Grid> solveRowBased(Grid grid){		
 		
@@ -952,7 +952,6 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	 * @param cellIndex der Index der Column, an dem sich die aktuell abgefragte Zelle befindet.
 	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle moeglichen Kandidaten von 1 bis 9 gespeichert sind.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhaelt.
 	 * @return int[] candidateArray Ein Array auf dem, nach durchlaufen der Methode, alle in der Column auftretenden Zahlen, mit einer null ersetzt wurden.
 	 */
 	public int[] checkCol(int cellIndex, int[] candidateArray, Grid grid){
