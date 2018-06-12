@@ -5,6 +5,9 @@ import java.util.List;
 
 import data.Grid;
 
+/**
+ * @author Christoph Teichmeister
+ */
 public class GridUtils3 implements GridUtil3{
 
 	/**
