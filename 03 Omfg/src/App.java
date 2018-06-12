@@ -72,6 +72,7 @@ public class App {
 //		System.out.println(abc.solveRowBased(a).size());
 		
 //		listAuslesen(allGrids);
+		abc.solveRowBased(a);
 		listAuslesen(abc.solveRowBased(a));
 //		System.out.println(abc.solveRowBased(a).toString());
 	}
