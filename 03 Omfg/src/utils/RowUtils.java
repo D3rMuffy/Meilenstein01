@@ -13,12 +13,12 @@ import data.Grid;
 public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
 	/**
-	 * Entscheidet, ob in der Einheit eine zulässige Belegung vorliegt;
+	 * Entscheidet, ob in der Einheit eine zulaessige Belegung vorliegt;
 	 *	liefert den Wert true, falls ja, false sonst.
 	 *	Die Einheit wird durch anchor eindeutig festgelegt.
 	 *	
-	 * @param grid Das Sudoku auf dem geprüft werden soll, ob sich eine validRow befindet
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param grid Das Sudoku auf dem geprueft werden soll, ob sich eine validRow befindet
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return boolean ob die Row valid ist oder nicht
 	 */
 	public boolean isValidRow(Grid grid, Cell anchor) {
@@ -54,8 +54,8 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	 * Entscheidet, ob in grid eine FullHouse-Row existiert;
 	 *  liefert den Wert true, falls ja, false sonst.
 	 *	
-	 * @param grid Das Sudoku auf dem geprüft werden soll, ob sich eine fullHouse Reihe befindet
-	 * @return answer boolean ob geprüftes Sudoku eine fullHouseRow besitzt oder nicht
+	 * @param grid Das Sudoku auf dem geprueft werden soll, ob sich eine fullHouse Reihe befindet
+	 * @return answer boolean ob geprueftes Sudoku eine fullHouseRow besitzt oder nicht
 	 */
 	public boolean hasFullHouseRow(Grid grid) {		
 		int j = 1;
@@ -86,9 +86,9 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	 * liefert den Wert true, falls ja, false sonst.
 	 * Die Einheit wird durch anchor eindeutig festgelegt.
 	 *	
-	 * @param grid Das Sudoku auf dem geprüft werden soll, ob sich eine fullHouse befindet
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
-	 * @return boolean ob die geprüfte Row eine fullHouseRow ist oder nicht
+	 * @param grid Das Sudoku auf dem geprueft werden soll, ob sich eine fullHouse befindet
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
+	 * @return boolean ob die gepruefte Row eine fullHouseRow ist oder nicht
 	 */
 	public boolean isFullHouseRow(Grid grid, Cell anchor) {	
 		int minusCounter = 0;
@@ -109,12 +109,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 
 	/**
 	 * Entscheidet, ob die Einheit mindestens eine
-	 *  NakedSingle-Zelle enthält.
+	 *  NakedSingle-Zelle enthaelt.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt.
 	 *	
-	 * @param grid Das Sudoku auf dem geprüft werden soll, ob sich eine Row mit einer NakedSingleCell befindet
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
-	 * @return answer boolean ob die geprüfte Row eine NakedSingleCell hat oder nicht
+	 * @param grid Das Sudoku auf dem geprueft werden soll, ob sich eine Row mit einer NakedSingleCell befindet
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
+	 * @return answer boolean ob die gepruefte Row eine NakedSingleCell hat oder nicht
 	 */
 	public boolean isRowWithNakedSingleCell(Grid grid, Cell anchor) {
 		boolean answer = false;
@@ -129,12 +129,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 * Gibt die minimale NakedSingle-Zelle der Einheit zurück.
+	 * Gibt die minimale NakedSingle-Zelle der Einheit zurueck.
 	 * Die Einheit wird durch anchor eindeutig festgelegt.
-	 * Betrachtet nur den Fall in dem die Einheit mindestens eine NakedSingle-Zelle enthält, andere Fälle werden nicht abgegriffen
+	 * Betrachtet nur den Fall in dem die Einheit mindestens eine NakedSingle-Zelle enthaelt, andere Faelle werden nicht abgegriffen
 	 *	
 	 * @param grid Das Sudoku auf dem die Zelle ermittelt werden soll, die eine NakedSingleCell ist.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return grid.getCell(anchor.getrIndex(), cIndex+1) Die Zelle, die eine NakedSingleCell ist. null falls keine solche existiert.
 	 */
 	public Cell getRowMinimalNakedSingleCell(Grid grid, Cell anchor) {
@@ -149,11 +149,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 *  Entscheidet, ob die Einheit mindestens eine HiddenSingle-Zelle enthält.
+	 *  Entscheidet, ob die Einheit mindestens eine HiddenSingle-Zelle enthaelt.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt.
 	 *	
-	 * @param grid Das Sudoku auf dem ermittelt werden soll, ob eine Reihe eine HiddenSingle-Zelle enthält.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param grid Das Sudoku auf dem ermittelt werden soll, ob eine Reihe eine HiddenSingle-Zelle enthaelt.
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return boolean true, falls eine solche Zelle existiert, false wenn nicht
 	 */
 	public boolean isRowWithHiddenSingleCell(Grid grid, Cell anchor) {
@@ -165,13 +165,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 *  Gibt die minimale HiddenSingle-Zelle der Einheit zurück.
+	 *  Gibt die minimale HiddenSingle-Zelle der Einheit zurueck.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt.
-	 *  Es wird nur der Fall betrachtet, in dem die Einheit mindestens eine HiddenSingle-Zelle enthält.
-	 *  Andere Fälle werden nicht abgefangen 
+	 *  Es wird nur der Fall betrachtet, in dem die Einheit mindestens eine HiddenSingle-Zelle enthaelt.
+	 *  Andere Faelle werden nicht abgefangen 
 	 *	
 	 * @param grid Das Sudoku auf dem die Zelle ermittelt werden soll, die eine HiddenSingle-Zelle ist.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return grid.getCell(45-lostRow, 45-lostCol) returnt die Zelle, die eine HiddenSingle-Zelle ist, null falls es keine solche gibt.
 	 */
 	public Cell getRowMinimalHiddenSingleCell(Grid grid, Cell anchor) {
@@ -212,7 +212,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 							}
 						}
 						
-						//Erstelle Array[][] für Block
+						//Erstelle Array[][] fuer Block
 						int rMin = 0;
 						int rMax = 0;
 						int cMin = 0;
@@ -302,11 +302,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *  Entscheidet, ob die Einheit ein HiddenPair-Zellpaar enthält.
+	 *  Entscheidet, ob die Einheit ein HiddenPair-Zellpaar enthaelt.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt. 
 	 *	
 	 * @param grid Das Sudoku auf dem die Zellen ermittelt werden sollen, die ein HiddenSingle-Paar bilden.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return boolean true, falls Pair existiert, false falls nicht.
 	 */
 	public boolean isRowWithHiddenPairCells(Grid grid, Cell anchor) {
@@ -318,14 +318,14 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 *  Gibt das minimale HiddenPair-Zellpaar der Einheit zurück.
+	 *  Gibt das minimale HiddenPair-Zellpaar der Einheit zurueck.
 	 *  Dabei sind die zwei in Cell[] gespeicherten Zellen aufsteigend sortiert. 
 	 *  Gibt es kein HiddenPair-Zellpaarin der Einheit, so ist Cell[] leer.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt.
 	 *	
 	 * @param grid Das Sudoku auf dem die Zellen ermittelt werden sollen, die ein HiddenSingle-Paar bilden.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
-	 * @return answer Das Cell[] Array in dem beide HiddenPair Zellen gespeichert sind. Falls es keine gibt, so wird null returnt.
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
+	 * @return answer Das Cell[] Array in dem beide HiddenPair Zellen gespeichert sind. Falls es keine gibt, so wird ein leeres Cell[] Array returnt.
 	 */
 	public Cell[] getRowMinimalHiddenPairCells(Grid grid, Cell anchor) {
 	
@@ -336,25 +336,25 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		
 		int[] candidates = {0,0,0,0,0,0,0,0,0};
 		
-		for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){ //DURCHLÄUFT ROW
+		for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){ //DURCHLaeUFT ROW
 			if(grid.getValue(anchor.getrIndex(), cIndex+1) == -1){ //DA WO ZELLE KEINEN WERT BESCHRIEBEN HAT
-				for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cIndex].size(); candInd++){ //DURCHLÄUFT KANDIDATENLISTE DER ZELLE
+				for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cIndex].size(); candInd++){ //DURCHLaeUFT KANDIDATENLISTE DER ZELLE
 					
-					candidates[((int) allCandidateArray[anchor.getrIndex()-1][cIndex].get(candInd))-1]++; //ERHÖHE CANDIDATES AN GEFUNDENER ZAHL
+					candidates[((int) allCandidateArray[anchor.getrIndex()-1][cIndex].get(candInd))-1]++; //ERHoeHE CANDIDATES AN GEFUNDENER ZAHL
 					
 				}
 			}
 		}
 		
-		for(int i = 0; i < candidates.length; i++){ //DURCHLÄUFT CANDIDATES ARRAY UND SUCHT AUF ZWEIMAL ZWEI
+		for(int i = 0; i < candidates.length; i++){ //DURCHLaeUFT CANDIDATES ARRAY UND SUCHT AUF ZWEIMAL ZWEI
 			if(candidates[i] == 2){
 				for(int j = 0; j < candidates.length; j++){
 					if(candidates[j] == 2 && j != i){
 						foundPair = true;
 						
-						for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){ //DURCHLÄUFT ROW
+						for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){ //DURCHLaeUFT ROW
 							if(grid.getValue(anchor.getrIndex(), cIndex+1) == -1){ //DA WO ZELLE KEINEN WERT BESCHRIEBEN HAT
-								for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cIndex].size(); candInd++){ //DURCHLÄUFT KANDIDATENLISTE DER ZELLE
+								for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cIndex].size(); candInd++){ //DURCHLaeUFT KANDIDATENLISTE DER ZELLE
 									//SCHREIBT ZELLEN RAUS DIE i UND j BEINHALTEN									
 									if((int) allCandidateArray[anchor.getrIndex()-1][cIndex].get(candInd) == i+1){ 
 										hiddenCellsList.add(grid.getCell(anchor.getrIndex(), cIndex+1));
@@ -375,7 +375,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 				hiddenCellArray[i] = hiddenCellsList.get(i);
 			}
 			
-			//PRÜFT UND TAUSCHT GGF ZELLEN SO DASS KLEINSTER INDEX VORNE GRÖßTER INDEX HINTEN
+			//PRueFT UND TAUSCHT GGF ZELLEN SO DASS KLEINSTER INDEX VORNE GRoessTER INDEX HINTEN
 			int smaller = 0;
 			while (smaller < hiddenCellArray.length - 1) {
 				for (int i = 0; i < hiddenCellArray.length - 1; i++) {
@@ -392,20 +392,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			answer[1] = hiddenCellArray[1];
 		}
 		
-		if(answer[0] != null){
-			return answer;
-		}else{
-			return null;
-		}
+		return answer;
 	}
 
 	/**
-	 *  Entscheidet, ob die Einheit ein NakedPair-Zellpaar enthält;
+	 *  Entscheidet, ob die Einheit ein NakedPair-Zellpaar enthaelt;
 	 * liefert den Wert true, falls ja, sonst false.
 	 * Die Einheit wird durch anchor eindeutig festgelegt. 
 	 *	
 	 * @param grid Das Sudoku auf dem ermittelt werden soll, ob ein NakedPair existiert..
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
 	 * @return boolean true, falls ein solches Pair existiert. False falls nicht.
 	 */
 	public boolean isRowWithNakedPairCells(Grid grid, Cell anchor) {
@@ -417,14 +413,14 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *  Gibt das minimale NakedPair-Zellpaar der Einheit zurück.
+	 *  Gibt das minimale NakedPair-Zellpaar der Einheit zurueck.
 	 *  Dabei sind die zwei in Cell[] gespeicherten Zellen aufsteigend sortiert.
 	 *  Gibt es kein NakedPair-Zellpaarin der Einheit, so ist dementsprechend Cell[] leer.
 	 *  Die Einheit wird durch anchor eindeutig festgelegt 
 	 *	
 	 * @param grid Das Sudoku auf dem die Zellen ermittelt werden sollen, die ein NakedPair bilden.
-	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprüft wird, bestimmt wird
-	 * @return cells Cell[] Array in dem die NakedPair-Zellen stehen. Returnt null falls es solche nicht gibt.
+	 * @param anchor Die Ankerzelle mittels welcher, die Row auf der geprueft wird, bestimmt wird
+	 * @return cells Cell[] Array in dem die NakedPair-Zellen stehen. Returnt leeres cells Array, falls es solche nicht gibt.
 	 */
 	public Cell[] getRowMinimalNakedPairCells(Grid grid, Cell anchor) {
 		updateAllCandidates(grid);
@@ -452,12 +448,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 				}
 			}
 		}
-		
-		if(cells[0] != null && cells[1] != null){
-			return cells;
-		}else{
-			return null;
-		}
+		return cells;
 	}
 
 	/**
@@ -520,10 +511,10 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	/**
 	 *  Entscheidet, ob grid2 aus grid1 entstanden ist,
 	 *  indem eine Blockpermutation vorgenommen wurde;
-	 *  falls ja, wird true zurückgeliefert, sonst false.
+	 *  falls ja, wird true zurueckgeliefert, sonst false.
 	 *	
 	 * @param grid1 Das Ausgangssudoku, welches herangezogen wird, um herauszufinden ob grid2 aus einer Blockpermuation daraus entstanden ist.
-	 * @param grid2 Das veränderte Sudoku, auf dem geprüft wird, ob es aus einer Blockpermuation des ersten Sudokus entstand.
+	 * @param grid2 Das veraenderte Sudoku, auf dem geprueft wird, ob es aus einer Blockpermuation des ersten Sudokus entstand.
 	 * @return boolean true falls grid2 durch eine BLockPermutation aus grid1 entstand. False falls dies nicht der Fall.
 	 */
 	public boolean isBlockInternRowPermutation(Grid grid1, Grid grid2) {
@@ -599,14 +590,14 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 *   Gibt den Blockbildvektor zurück, der die Blockpermutation beschreibt,
+	 *   Gibt den Blockbildvektor zurueck, der die Blockpermutation beschreibt,
 	 *   welche auf grid1 angewendet wurde, so dass grid2 entstanden ist.
 	 *   Es wird nur der Fall betrachtet, in dem grid2 durch eine BlockPermuation von Grid1 entstand.
 	 *   
 	 * @param grid1 Das Ausgangssudoku, welches herangezogen wird, um herauszufinden ob grid2 aus einer Blockpermuation daraus entstanden ist.
-	 * @param grid2 Das veränderte Sudoku, auf dem geprüft wird, ob es aus einer Blockpermuation des ersten Sudokus entstand.
-	 * @param anchor Ankerzelle auf der geprüft wird, ob die Rows aus grid2 durch eine Permutation der Rows aus grid1 entstanden ist.
-	 * @return image Der Vektor durch den, grid2 aus grid1 entstanden ist. Null falls grid2 nicht durch eine Blockpermutation aus grid1 entstanden ist.
+	 * @param grid2 Das veraenderte Sudoku, auf dem geprueft wird, ob es aus einer Blockpermuation des ersten Sudokus entstand.
+	 * @param anchor Ankerzelle auf der geprueft wird, ob die Rows aus grid2 durch eine Permutation der Rows aus grid1 entstanden ist.
+	 * @return image Der Vektor durch den, grid2 aus grid1 entstanden ist.
 	 */
 	public int[] getBlockInternRowPermutationImage(Grid grid1, Grid grid2, Cell anchor) {
 		int[][] aRows = new int[27][2];
@@ -694,11 +685,8 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			}
 		}
 		
-		if(emptyCounter > 0){
-			return null;
-		}else{
-			return image;
-		}
+		return image;
+		
 	}
 
 	/**
@@ -733,15 +721,15 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 
 	/**
-	 * Gibt den Bildvektor der Wertpermutation wieder, welche die Einheit von grid1 in die Einheit von grid2 überführt hat.
+	 * Gibt den Bildvektor der Wertpermutation wieder, welche die Einheit von grid1 in die Einheit von grid2 ueberfuehrt hat.
 	 * Die Einheit wird durch anchor eindeutig festgelegt.
 	 * Dabei wird nur der Fall betrachtet, in dem grid2 durch eine Wertpermutation von grid1 entstanden ist.
-	 * Andere Fälle werden mit der Methode nicht abgefangen.
+	 * Andere Faelle werden mit der Methode nicht abgefangen.
 	 *   
 	 * @param grid1 Das Sudoku, auf dem ermittelt werden soll, durch welchen Vektor grid2 entstanden ist.
 	 * @param grid1 Das Sudoku, welches durch Wertepermutation aus grid1 entstanden ist.
 	 * @param anchor Ankerzelle auf der ermittelt wird, was der Vektor der Wertepermutation war.
-	 * @return image Vektor, der beschreibt welche Zahl auf welche abbildet. null falls grid2 nicht aus grid1 entstanden ist.
+	 * @return image Vektor, der beschreibt welche Zahl auf welche abbildet.
 	 */
 	public int[] getRowValuePermutationImage(Grid grid1, Grid grid2, Cell anchor) {
 		int number = 1;
@@ -765,11 +753,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			number++;
 		}
 		
-		if(noValuePermutationCounter == 9){
-			return null;
-		}else{
-			return image;
-		}
+		return image;
 	}
 
 	/**
@@ -793,13 +777,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Gibt aufsteigend sortiert alle Zellen der Einheit zurück, welche eine -1 beinhalten.
+	 *   Gibt aufsteigend sortiert alle Zellen der Einheit zurueck, welche eine -1 beinhalten.
 	 *   Die Einheit wird durch anchor eindeutig festgelegt.
-	 *   Enthält die Einheit keine leeren Zellen, so ist die Liste dementsprechend leer. 
+	 *   Enthaelt die Einheit keine leeren Zellen, so ist die Liste dementsprechend leer. 
 	 *   
 	 * @param grid Das Sudoku, auf dem die white Spaces ermittelt werden sollen.
 	 * @param anchor Ankerzelle auf der ermittelt wird, ob grid2 aus grid1 entstanden ist
-	 * @return List<Cell> List, die die Zellen die nicht belegt sind, zurückgibt. Leer, falls es solche Zellen nicht gibt.
+	 * @return List<Cell> List, die die Zellen die nicht belegt sind, zurueckgibt. Leer, falls es solche Zellen nicht gibt.
 	 */
 	public List<Cell> getRowWhiteSpaces(Grid grid, Cell anchor){
 		List<Cell> a = new LinkedList <Cell>();
@@ -829,11 +813,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	int arrayIndex = 0;
 	
 	/**
-	 *   Analysiert mittels Abruf vorher programmierter Methoden, ob ein Sudoku lösbar ist und befüllt, falls möglich,
-	 *   die Zellen entsprechend. Gibt eine Liste der Grids zurück, die nach jeder Zellenveränderung entstanden sind. 
+	 *   Analysiert mittels Abruf vorher programmierter Methoden, ob ein Sudoku loesbar ist und befuellt, falls moeglich,
+	 *   die Zellen entsprechend. Gibt eine Liste der Grids zurueck, die nach jeder Zellenveraenderung entstanden sind. 
 	 *   
-	 * @param grid Das Sudoku, auf dem die Methoden angewandt werden, um es zu lösen.
-	 * @return List<Grid> List, die die Grids die nach jeder Zellenveränderung entstanden sind, wiedergibt.
+	 * @param grid Das Sudoku, auf dem die Methoden angewandt werden, um es zu loesen.
+	 * @return List<Grid> List, die die Grids die nach jeder Zellenveraenderung entstanden sind, wiedergibt.
 	 */
 	public List<Grid> solveRowBased(Grid grid){		
 		
@@ -880,7 +864,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Durchläuft für jede Zelle des Grids, die möglichen Kandidaten und speichert diese in die LinkedList allCandidateArray. 
+	 *   Durchlaeuft fuer jede Zelle des Grids, die moeglichen Kandidaten und speichert diese in die LinkedList allCandidateArray. 
 	 *   
 	 * @param grid Das Sudoku, dessen Zellen durchlaufen werden, dessen Kandidaten ermittelt werden sollen.
 	 */
@@ -941,11 +925,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu updateAllCandidates. DUrchläuft die jeweilige Reihe der aktuell übergebenen Zelle um für diese die Kandidaten zu ermitteln.
+	 *   Hilfsmethode zu updateAllCandidates. DUrchlaeuft die jeweilige Reihe der aktuell uebergebenen Zelle um fuer diese die Kandidaten zu ermitteln.
 	 *   
-	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle möglichen Kandidaten von 1 bis 9 gespeichert sind.
+	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle moeglichen Kandidaten von 1 bis 9 gespeichert sind.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhält.
+	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhaelt.
 	 * @return int[] candidateArray Ein Array auf dem, nach durchlaufen der Methode, alle in der Reihe auftretenden Zahlen, mit einer null ersetzt wurden.
 	 */
 	public int[] checkRow(int[] candidateArray, Grid grid, Cell anchor){
@@ -963,12 +947,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu updateAllCandidates. Durchläuft die jeweilige Column der aktuell übergebenen Zelle um für diese die Kandidaten zu ermitteln.
+	 *   Hilfsmethode zu updateAllCandidates. Durchlaeuft die jeweilige Column der aktuell uebergebenen Zelle um fuer diese die Kandidaten zu ermitteln.
 	 *   
 	 * @param cellIndex der Index der Column, an dem sich die aktuell abgefragte Zelle befindet.
-	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle möglichen Kandidaten von 1 bis 9 gespeichert sind.
+	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle moeglichen Kandidaten von 1 bis 9 gespeichert sind.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhält.
+	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhaelt.
 	 * @return int[] candidateArray Ein Array auf dem, nach durchlaufen der Methode, alle in der Column auftretenden Zahlen, mit einer null ersetzt wurden.
 	 */
 	public int[] checkCol(int cellIndex, int[] candidateArray, Grid grid){
@@ -986,12 +970,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu updateAllCandidates. Durchläuft den jeweiligen Block der aktuell übergebenen Zelle um für diese die Kandidaten zu ermitteln.
+	 *   Hilfsmethode zu updateAllCandidates. Durchlaeuft den jeweiligen Block der aktuell uebergebenen Zelle um fuer diese die Kandidaten zu ermitteln.
 	 *   
 	 * @param cellIndex der Index der Column, an dem sich die aktuell abgefragte Zelle befindet.
-	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle möglichen Kandidaten von 1 bis 9 gespeichert sind.
+	 * @param candidateArray Ein Array auf dem von Stelle 0 bis 8, alle moeglichen Kandidaten von 1 bis 9 gespeichert sind.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhält.
+	 * @param anchor Zelle die aktuell ihre Kandidatenliste erhaelt.
 	 * @return int[] candidateArray Ein Array auf dem, nach durchlaufen der Methode, alle in dem Block auftretenden Zahlen, mit einer null ersetzt wurden.
 	 */
 	public int[] checkBlock(int cellIndex, int[] candidateArray, Grid grid, Cell anchor){
@@ -1014,16 +998,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchläuft die Rows der gefundenen HiddenPair/NakedPair Zellen und löscht die möglichen Werte dieser aus den Kandidaten Listen der Zellen.
+	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchlaeuft die Rows der gefundenen HiddenPair/NakedPair Zellen und loescht die moeglichen Werte dieser aus den Kandidaten Listen der Zellen.
 	 *   
 	 * @param a "Erste" Zelle des Pairs.
 	 * @param b "Zweite" Zelle des Pairs.
 	 * @param cand1 Erster Kandidat des Pairs.
 	 * @param cand2 Zweiter Kandidat des Pairs.
-	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgeführt werden müssen.
+	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgefuehrt werden muessen.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs gelöscht wurden, speichert um diese bei zukünftigen KandidatenUpdates nicht fälschlicherweise mit den Kandidaten der Pairs zu belegen.
-	 * @return aca allCandidateArray. Gibt die geänderte Kandidatenliste zurück.
+	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs geloescht wurden, speichert um diese bei zukuenftigen KandidatenUpdates nicht faelschlicherweise mit den Kandidaten der Pairs zu belegen.
+	 * @return aca allCandidateArray. Gibt die geaenderte Kandidatenliste zurueck.
 	 */
 	public LinkedList[][] updateRow(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
 		int changeCounter = 0;
@@ -1051,16 +1035,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchläuft die Columns der gefundenen HiddenPair/NakedPair Zellen und löscht die möglichen Werte dieser aus den Kandidaten Listen der Zellen.
+	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchlaeuft die Columns der gefundenen HiddenPair/NakedPair Zellen und loescht die moeglichen Werte dieser aus den Kandidaten Listen der Zellen.
 	 *   
 	 * @param a "Erste" Zelle des Pairs.
 	 * @param b "Zweite" Zelle des Pairs.
 	 * @param cand1 Erster Kandidat des Pairs.
 	 * @param cand2 Zweiter Kandidat des Pairs.
-	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgeführt werden müssen.
+	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgefuehrt werden muessen.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs gelöscht wurden, speichert um diese bei zukünftigen KandidatenUpdates nicht fälschlicherweise mit den Kandidaten der Pairs zu belegen.
-	 * @return aca allCandidateArray. Gibt die geänderte Kandidatenliste zurück.
+	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs geloescht wurden, speichert um diese bei zukuenftigen KandidatenUpdates nicht faelschlicherweise mit den Kandidaten der Pairs zu belegen.
+	 * @return aca allCandidateArray. Gibt die geaenderte Kandidatenliste zurueck.
 	 */
 	public LinkedList[][] updateCol(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
 		int changeCounter = 0;
@@ -1105,16 +1089,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchläuft die Blöcke der gefundenen HiddenPair/NakedPair Zellen und löscht die möglichen Werte dieser aus den Kandidaten Listen der Zellen.
+	 *   Hilfsmethode zu Schritt 5 und 6 der Solver Methode. Durchlaeuft die Bloecke der gefundenen HiddenPair/NakedPair Zellen und loescht die moeglichen Werte dieser aus den Kandidaten Listen der Zellen.
 	 *   
 	 * @param a "Erste" Zelle des Pairs.
 	 * @param b "Zweite" Zelle des Pairs.
 	 * @param cand1 Erster Kandidat des Pairs.
 	 * @param cand2 Zweiter Kandidat des Pairs.
-	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgeführt werden müssen.
+	 * @param aca allCandidateArray. Das Array in dem die Kandidatenlisten gespeichert sind und auf dem dementsprechend die Updates der Kandidatenlisten durchgefuehrt werden muessen.
 	 * @param grid Grid, dessen Zellen durchlaufen werden um ihre Kandidatenlisten zu erhalten.
-	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs gelöscht wurden, speichert um diese bei zukünftigen KandidatenUpdates nicht fälschlicherweise mit den Kandidaten der Pairs zu belegen.
-	 * @return aca allCandidateArray. Gibt die geänderte Kandidatenliste zurück.
+	 * @param cellsToDeleteFrom List, in der die Zellen, aus deren Kandidatenlisten die Kandidaten der Pairs geloescht wurden, speichert um diese bei zukuenftigen KandidatenUpdates nicht faelschlicherweise mit den Kandidaten der Pairs zu belegen.
+	 * @return aca allCandidateArray. Gibt die geaenderte Kandidatenliste zurueck.
 	 */
 	public LinkedList[][] updateBlock(Cell a, Cell b, int cand1, int cand2, LinkedList[][] aca, Grid grid, List cellsToDeleteFrom){
 		int blockCol = (a.getcIndex() - ((a.getcIndex()-1)%3))-1;
@@ -1173,9 +1157,9 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Hilfsmethode um das CandidateArray, mit dem in der Methode updateAllCandidates gearbeitet wird, mit den Zahlen 1-9 aufzufüllen.
+	 *   Hilfsmethode um das CandidateArray, mit dem in der Methode updateAllCandidates gearbeitet wird, mit den Zahlen 1-9 aufzufuellen.
 	 *   
-	 *  @return a Das gefüllte CandidateArray
+	 *  @return a Das gefuellte CandidateArray
 	 */
 	public int[] fillCandidateArray(){
 		int[] a = {1,2,3,4,5,6,7,8,9};
@@ -1183,11 +1167,11 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Erster Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku vollständig und zulässig gefüllt ist.
-	 *   Returnt false, falls dem so ist. True falls es nicht vollständig oder zulässig belegt ist.
+	 *   Erster Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku vollstaendig und zulaessig gefuellt ist.
+	 *   Returnt false, falls dem so ist. True falls es nicht vollstaendig oder zulaessig belegt ist.
 	 *   
-	 *   @param grid grid auf dem Reihen auf Zulässigkeit geprüft werden.
-	 *  @return answer true, falls nicht vollständig oder zulässig. false falls schon.
+	 *   @param grid grid auf dem Reihen auf Zulaessigkeit geprueft werden.
+	 *  @return answer true, falls nicht vollstaendig oder zulaessig. false falls schon.
 	 */
 	public boolean step1(Grid grid){
 		
@@ -1215,10 +1199,10 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
 	/**
 	 *   Zweiter Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku eine FullHouse-Einheit besitzt. 
-	 *   Falls es eine solche besitzt, füllt es die Zelle dieser mit ihrem einzig möglichen Wert.
+	 *   Falls es eine solche besitzt, fuellt es die Zelle dieser mit ihrem einzig moeglichen Wert.
 	 *   Returnt true, falls dies geschehen ist. Returnt false, falls es keine solche Zelle bzw Einheit gibt.
 	 *   
-	 *   @param grid grid auf dem die Reihen nach einer FullHouse Zelle überprüft werden.
+	 *   @param grid grid auf dem die Reihen nach einer FullHouse Zelle ueberprueft werden.
 	 *   @return answer true, falls eine FullHouse Zelle gefunden wurde, false falls nicht.
 	 */
 	public boolean step2(Grid grid){
@@ -1242,10 +1226,10 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
 	/**
 	 *   Dritter Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku mindestens eine NakedSingle Zelle besitzt. 
-	 *   Falls es eine solche besitzt, füllt es die Zelle dieser mit ihrem einzig möglichen Wert.
+	 *   Falls es eine solche besitzt, fuellt es die Zelle dieser mit ihrem einzig moeglichen Wert.
 	 *   Returnt true, falls dies geschehen ist. Returnt false, falls es keine solche Zelle bzw Einheit gibt.
 	 *   
-	 *   @param grid grid auf dem die Reihen nach einer NakedSingle Zelle überprüft werden.
+	 *   @param grid grid auf dem die Reihen nach einer NakedSingle Zelle ueberprueft werden.
 	 *   @return answer true, falls eine NakedSingle Zelle gefunden wurde, false falls nicht.
 	 */
 	public boolean step3(Grid grid){
@@ -1263,10 +1247,10 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
 	/**
 	 *   Vierter Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku mindestens eine HiddenSingle Zelle besitzt. 
-	 *   Falls es eine solche besitzt, füllt es die Zelle dieser mit ihrem einzig möglichen Wert.
+	 *   Falls es eine solche besitzt, fuellt es die Zelle dieser mit ihrem einzig moeglichen Wert.
 	 *   Returnt true, falls dies geschehen ist. Returnt false, falls es keine solche Zelle bzw Einheit gibt.
 	 *   
-	 *   @param grid grid auf dem die Reihen nach einer HiddenSingle Zelle überprüft werden.
+	 *   @param grid grid auf dem die Reihen nach einer HiddenSingle Zelle ueberprueft werden.
 	 *   @return answer true, falls eine HiddenSingle Zelle gefunden wurde, false falls nicht.
 	 */
 	public boolean step4(Grid grid){
@@ -1284,13 +1268,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	}
 	
 	/**
-	 *   Fünfter Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku ein NakedPair besitzt.
-	 *   Falls es ein solches besitzt, werden die jeweiligen Kandidaten aus allen, von diesen PairZellen, betroffenen Zellen-Kandidatenlisten gelöscht.
-	 *   Falls dieses Vorgehen in mindestens einer Kandidatenlist etwas geändert hat, wird true returnt. Falls nicht, false.
-	 *   Die Kandidaten werden dabei nicht aus den PairZellen-Kandidatenlisten gelöscht.
+	 *   Fuenfter Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku ein NakedPair besitzt.
+	 *   Falls es ein solches besitzt, werden die jeweiligen Kandidaten aus allen, von diesen PairZellen, betroffenen Zellen-Kandidatenlisten geloescht.
+	 *   Falls dieses Vorgehen in mindestens einer Kandidatenlist etwas geaendert hat, wird true returnt. Falls nicht, false.
+	 *   Die Kandidaten werden dabei nicht aus den PairZellen-Kandidatenlisten geloescht.
 	 *   
 	 *   @param grid grid auf dem ein NakedPair gesucht wird.
-	 *   @return boolean true, falls das KAndidatenlisten Update in mindestens einer Kandidatenliste etwas geändert hat. False falls nicht.
+	 *   @return boolean true, falls das KAndidatenlisten Update in mindestens einer Kandidatenliste etwas geaendert hat. False falls nicht.
 	 */
 	public boolean step5(Grid grid){		
 		updateChangedSomething = false;
@@ -1329,12 +1313,12 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
 	/**
 	 *   Sechster Schritt der Solver Methode, in dem ermittelt wird ob das Sudoku ein HiddenPair besitzt.
-	 *   Falls es ein solches besitzt, werden die jeweiligen Kandidaten aus allen, von diesen PairZellen, betroffenen Zellen-Kandidatenlisten gelöscht.
-	 *   Falls dieses Vorgehen in mindestens einer Kandidatenlist etwas geändert hat, wird true returnt. Falls nicht, false.
-	 *   Die Kandidaten werden dabei nicht aus den PairZellen-Kandidatenlisten gelöscht.
+	 *   Falls es ein solches besitzt, werden die jeweiligen Kandidaten aus allen, von diesen PairZellen, betroffenen Zellen-Kandidatenlisten geloescht.
+	 *   Falls dieses Vorgehen in mindestens einer Kandidatenlist etwas geaendert hat, wird true returnt. Falls nicht, false.
+	 *   Die Kandidaten werden dabei nicht aus den PairZellen-Kandidatenlisten geloescht.
 	 *   
 	 *   @param grid grid auf dem ein HiddenPair gesucht wird.
-	 *   @return boolean true, falls das Kandidatenlisten Update in mindestens einer Kandidatenliste etwas geändert hat. False falls nicht.
+	 *   @return boolean true, falls das Kandidatenlisten Update in mindestens einer Kandidatenliste etwas geaendert hat. False falls nicht.
 	 */
 	public boolean step6 (Grid grid){
 		updateChangedSomething = false;
