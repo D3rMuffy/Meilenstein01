@@ -320,6 +320,7 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		updateAllCandidates(grid);
 		List<Cell> hiddenCellsList = new LinkedList<Cell>();
 		Cell[] answer = new Cell[2];
+		boolean foundPair = false;
 		
 		int[] candidates = {0,0,0,0,0,0,0,0,0};
 		
@@ -337,14 +338,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 			if(candidates[i] == 2){
 				for(int j = 0; j < candidates.length; j++){
 					if(candidates[j] == 2 && j != i){
+						foundPair = true;
 						
 						for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){ //DURCHLÄUFT ROW
 							if(grid.getValue(anchor.getrIndex(), cIndex+1) == -1){ //DA WO ZELLE KEINEN WERT BESCHRIEBEN HAT
 								for(int candInd = 0; candInd < allCandidateArray[anchor.getrIndex()-1][cIndex].size(); candInd++){ //DURCHLÄUFT KANDIDATENLISTE DER ZELLE
-									
-									//SCHREIBT ZELLEN RAUS DIE i UND j BEINHALTEN
-									if((int) allCandidateArray[anchor.getrIndex()-1][cIndex].get(candInd) == i){ 
+									//SCHREIBT ZELLEN RAUS DIE i UND j BEINHALTEN									
+									if((int) allCandidateArray[anchor.getrIndex()-1][cIndex].get(candInd) == i+1){ 
 										hiddenCellsList.add(grid.getCell(anchor.getrIndex(), cIndex+1));
+										
+//										System.out.println(anchor.getrIndex() + "," + (cIndex+1));
 									}
 									
 								}
@@ -355,103 +358,30 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 				}
 			}
 		}
-		//SCHREIBT ZELLEN AUS LIST IN ARRAY
-		Cell[] hiddenCellArray = new Cell[hiddenCellsList.size()];
-		for(int i = 0; i < hiddenCellsList.size(); i++){
-			hiddenCellArray[i] = hiddenCellsList.get(i);
-		}
-		
-		//PRÜFT UND TAUSCHT GGF ZELLEN SO DASS KLEINSTER INDEX VORNE GRÖßTER INDEX HINTEN
-		int smaller = 0;
-		while(smaller != hiddenCellArray.length-1){
-			smaller = 0;
-			for(int i = 0; i < hiddenCellArray.length-1; i++){
-				if(hiddenCellArray[i].getcIndex() > hiddenCellArray[i+1].getcIndex()){
-					Cell temp = hiddenCellArray[i];
-					hiddenCellArray[i] = hiddenCellArray[i+1];
-					hiddenCellArray[i+1] = temp;
-				}else if(hiddenCellArray[i].getcIndex() < hiddenCellArray[i+1].getcIndex()){
-					smaller++;
+		if (foundPair == true){
+			//SCHREIBT ZELLEN AUS LIST IN ARRAY
+			Cell[] hiddenCellArray = new Cell[hiddenCellsList.size()];
+			for (int i = 0; i < hiddenCellsList.size(); i++) {
+				hiddenCellArray[i] = hiddenCellsList.get(i);
+			}
+			
+			//PRÜFT UND TAUSCHT GGF ZELLEN SO DASS KLEINSTER INDEX VORNE GRÖßTER INDEX HINTEN
+			int smaller = 0;
+			while (smaller < hiddenCellArray.length - 1) {
+				for (int i = 0; i < hiddenCellArray.length - 1; i++) {
+					if (hiddenCellArray[i].getcIndex() > hiddenCellArray[i + 1].getcIndex()) {
+						Cell temp = hiddenCellArray[i];
+						hiddenCellArray[i] = hiddenCellArray[i + 1];
+						hiddenCellArray[i + 1] = temp;
+					} else if (hiddenCellArray[i].getcIndex() < hiddenCellArray[i + 1].getcIndex()) {
+						smaller++;
+					}
 				}
 			}
+			answer[0] = hiddenCellArray[0];
+			answer[1] = hiddenCellArray[1];
 		}
-		
-		answer[0] = hiddenCellArray[0];
-		answer[1] = hiddenCellArray[1];
-		
-		
 		return answer;
-		
-		
-		
-		
-//		int[] numbers = {0,0,0,0,0,0,0,0,0};
-//		Cell[] cellsCorrNum = new Cell[9];
-//		Cell[] answer = new Cell[2];
-//		
-//		for(int rIndex = 0; rIndex < allCandidateArray.length; rIndex++){
-//			for(int cIndex = 0; cIndex < allCandidateArray.length; cIndex++){
-//				
-//				int candInd = 0;
-//				while(candInd < allCandidateArray[rIndex][cIndex].size()){
-//					
-//					int number = (int) allCandidateArray[rIndex][cIndex].get(candInd);
-//					
-//					if(number < 10 && number > 0){
-//						numbers[number-1]++;
-//						if(numbers[number-1] == 1){
-//							cellsCorrNum[number-1] = grid.getCell(rIndex+1, cIndex+1);
-//						}else if(numbers[number-1] > 1){
-//							cellsCorrNum[number-1] = null;
-//						}
-//					}
-//					candInd++;
-//				}
-//			}
-//		}
-//		
-//		List<Cell> cells = new LinkedList<Cell>();
-//		for(int i = 0; i < cellsCorrNum.length; i++){
-//			if(cellsCorrNum[i] != null && cellsCorrNum[i].getrIndex() == anchor.getrIndex()){
-//				cells.add(cellsCorrNum[i]);
-//			}
-//		}
-//		
-//		if(cells.size() > 2){
-//			int cellsInd = 0;
-//			int smaller = 0;
-//			
-//			while(cellsInd < cells.size()-1 && smaller != cells.size()-1){
-//				if(cells.get(cellsInd).getrIndex() > cells.get(cellsInd+1).getrIndex()){
-//					Cell temp = cells.get(cellsInd);
-//					cells.set(cellsInd, cells.get(cellsInd+1));
-//					cells.set(cellsInd+1, temp);
-//					
-//				}else if(cells.get(cellsInd).getcIndex() < cells.get(cellsInd+1).getcIndex()){
-//					smaller++;
-//				}
-//				cellsInd++;
-//			}
-//			
-//			for(int i = 0; i < cells.size()-1; i++){
-//				if(cells.get(i).getrIndex() == cells.get(i+1).getrIndex()){
-//					answer[0] = cells.get(i);
-//					answer[1] = cells.get(i+1);
-//				}
-//			}
-//			
-//		}else if(cells.size() == 2){
-//			if(cells.get(0).getrIndex() == cells.get(1).getrIndex()){
-//				if(cells.get(0).getcIndex() > cells.get(1).getcIndex()){
-//					Cell temp = cells.get(0);
-//					cells.set(0, cells.get(1));
-//					cells.set(1, temp);
-//				}
-//			}
-//			answer[0] = cells.get(0);
-//			answer[1] = cells.get(1);
-//		}
-//		return answer;
 	}
 
 	public boolean isRowWithNakedPairCells(Grid grid, Cell anchor) {
@@ -813,73 +743,85 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	int[] foundNakedRow = {0,0,0,0,0,0,0,0,0};
 	int[] foundHiddenRow = {0,0,0,0,0,0,0,0,0};
 	
+	List<Grid> changes = new LinkedList<Grid>();
+	Grid[] changesArray = new Grid[12];
+	int arrayIndex = 0;
 	
-	public List<Grid> solveRowBased(Grid grid){
+	public List<Grid> solveRowBased(Grid grid){		
 		
 		if(updateChangedSomething == false){
-			System.out.println("NEU INITIALISIERT");
+//			System.out.println("NEU INITIALISIERT");
 			updateAllCandidates(grid);
 		}
-		System.err.println("BEGINNING");
-		auslesen(allCandidateArray);
+//		System.err.println("BEGINNING");
+//		auslesen(allCandidateArray);
+//		grid.print();
 		
-		boolean step1 = step1(grid);
-		label:if(step1 == true){
-			System.out.println("step 1 weiter");
-			boolean step2 = step2(grid);
-			if(step2 == false){
-				System.out.println("step 2 weiter");
-				boolean step3 = step3(grid);
-				if(step3 == false){
-					System.out.println("step 3 weiter");
-					boolean step4 = step4(grid);
-					if(step4 == false){
-						System.out.println("Step 4 weiter");
-						boolean step5 = step5(grid);
-						if(step5 == false){
-							System.out.println("Step 5 weiter");
-							boolean step6 = step6(grid);
-							if(step6 == false){
-								System.err.println("FAKKEN STOP");
-								break label;
-								
-							}else if(step6 == true){
-								System.err.println("STEP 6 PASSIERT - BACK TO STEP 1");
-								solveRowBased(grid);
-							}
-						}else if(step5 == true){
-							System.err.println("STEP 5 PASSIERT - BACK TO STEP 1");
-							solveRowBased(grid);
-						}
-					}else if(step4 == true){
-						System.err.println("STEP 4 PASSIERT - BACK TO STEP 1");
-						solveRowBased(grid);
-					}
-				}else if(step3 == true){
-					System.err.println("STEP 3 PASSIERT - BACK TO STEP 1");
-					solveRowBased(grid);
-				}
-			}else if(step2 == true){
-				System.err.println("STEP 2 PASSIERT - BACK TO STEP 1");
-				solveRowBased(grid);
-			}
-		}else if(step1 == false){
-			System.err.println("STEP 1 STOP");
-			solveRowBased(grid);
-		}
 		
-		System.err.println("NACH ALLEN STEPS");
-		for(int i = 0; i < allCandidateArray.length; i++){
-			for(int j = 0; j < allCandidateArray.length; j++){
-				System.out.println(allCandidateArray[i][j]);
-			}
-			System.out.println("");
-		}
 		
-		System.err.println("DAS FERTIGE GRID");
-		grid.print();
 		
-		return null;
+//		boolean step1 = step1(grid);
+//		
+//		label:if(step1 == true){
+//			System.out.println("step 1 weiter");
+//			boolean step2 = step2(grid);
+//			if(step2 == false){
+//				System.out.println("step 2 weiter");
+//				boolean step3 = step3(grid);
+//				if(step3 == false){
+//					System.out.println("step 3 weiter");
+//					boolean step4 = step4(grid);
+//					if(step4 == false){
+//						System.out.println("Step 4 weiter");
+//						boolean step5 = step5(grid);
+//						if(step5 == false){
+//							System.out.println("Step 5 weiter");
+//							boolean step6 = step6(grid);
+//							if(step6 == false){
+//								System.err.println("FAKKEN STOP");
+//								break label;
+//								
+//							}else if(step6 == true){
+//								System.err.println("STEP 6 PASSIERT - BACK TO STEP 1");
+//								solveRowBased(grid);
+//							}
+//						}else if(step5 == true){
+//							System.err.println("STEP 5 PASSIERT - BACK TO STEP 1");
+//							solveRowBased(grid);
+//						}
+//					}else if(step4 == true){
+//						System.err.println("STEP 4 PASSIERT - BACK TO STEP 1");
+//						solveRowBased(grid);
+//					}
+//				}else if(step3 == true){
+//					System.err.println("STEP 3 PASSIERT - BACK TO STEP 1");
+////					changes.add(grid);
+//					solveRowBased(grid);
+//				}
+//			}else if(step2 == true){
+//				System.err.println("STEP 2 PASSIERT - BACK TO STEP 1");
+//				solveRowBased(grid);
+//			}
+//		}else if(step1 == false){
+//			System.err.println("STEP 1 STOP");
+//			break label;
+//		}
+		
+//		System.err.println("NACH ALLEN STEPS");
+//		for(int i = 0; i < allCandidateArray.length; i++){
+//			for(int j = 0; j < allCandidateArray.length; j++){
+//				System.out.println(allCandidateArray[i][j]);
+//			}
+//			System.out.println("");
+//		}
+//		
+//		System.err.println("DAS FERTIGE GRID");
+//		grid.print();
+		
+//		System.out.println(changes.size());
+		
+		System.out.println("Raus");
+		return changes;
 	}
 	
 	
@@ -1288,12 +1230,8 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		
 		updateChangedSomething = false;
 		
-		for(int rIndex = 1; rIndex < 10; rIndex++){
-			System.out.println("die for");
-			System.out.println(rIndex);
-			
+		for(int rIndex = 1; rIndex < 10; rIndex++){			
 			if(getRowMinimalHiddenPairCells(grid, grid.getCell(rIndex, 1))[0] != null){
-				System.out.println("die if");
 //				auslesen(getRowMinimalHiddenPairCells(grid, grid.getCell(rIndex, 1)));
 //				System.out.println(getRowMinimalHiddenPairCells(grid, grid.getCell(rIndex, 1))[0] == null);
 				
@@ -1324,39 +1262,64 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 				}
 				
 			}
-			System.out.println("ende for");
 		}		
 		return false;
 	}
 	
-	public static void auslesen(int[] a){
+	public void auslesen(int[] a){
 		for(int i = 0; i < a.length; i++){
 			System.out.print(a[i]+",");
 		}
 		System.out.println("");
 	}
 	
-	public static void auslesen(Cell[] a){
+	public void auslesen(Cell[] a){
 		for(int i = 0; i < a.length; i++){
 			System.out.print(a[i]+",");
 		}
 		System.out.println("");
 	}
 	
-	public static void auslesen(LinkedList[] a){
+	public void auslesen(Grid[] a){
+		for(int i = 0; i < a.length; i++){
+			System.out.println(a[i]);
+		}
+		System.out.println("");
+	}
+	
+	public void auslesen(LinkedList[] a){
 		for(int i = 0; i < a.length; i++){
 			System.out.print(a[i]+",");
 		}
 		System.out.println("");
 	}
 	
-	public static void auslesen(LinkedList[][] a){
+	public void auslesen(LinkedList[][] a){
 		for(int i = 0; i < a.length; i++){
 			for(int j = 0; j < a.length; j++){
 				System.out.println(a[i][j]);
 			}
 		System.out.println("");
 		}
+	}
+	
+	public void listAuslesen(List<Grid> list){
+		System.out.println("EINMAL mit size " + list.size());
+		for(int i = 0; i < list.size(); i++){
+			System.out.println(i);
+			list.get(i).print();
+			System.out.println("");
+		}
+		System.out.println("");
+	}
+	
+	public void addToChanges(Grid grid){
+		Grid a = new Grid(9);
+		a = grid;
+		changes.add(arrayIndex, a);
+		arrayIndex++;
+		listAuslesen(changes);
+//		System.out.println(changes.size());
 	}
 
 }

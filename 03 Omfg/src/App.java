@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.List;
+
 import data.Cell;
 import data.Grid;
 import utils.GridUtils3;
@@ -13,16 +16,16 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		//HIDDEN SINGLE
-		int[] row1 = {+1,-1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row2=  {-1,-1,-1,+1,-1,-1,-1,-1,-1};
-		int[] row3 = {-1,-1,-1,-1,-1,-1,+1,-1,-1};
-		int[] row4 = {-1,+1,-1,-1,-1,-1,-1,-1,-1};
-		int[] row5 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
-		int[] row6 = {-1,-1,-1,-1,-1,-1,-1,+1,-1};
-		int[] row7 = {-1,-1,+1,-1,-1,-1,-1,-1,-1};
-		int[] row8 = {-1,-1,-1,-1,-1,+1,-1,-1,-1};
-		int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+		//LÖSBARES LEICHTES SUDOKU
+		int[] row1 = {-1,+5,+9,+3,+7,-1,+1,-1,-1};
+		int[] row2=  {-1,-1,-1,-1,+4,-1,+5,-1,+7};
+		int[] row3 = {+7,+2,-1,+8,+5,-1,-1,-1,+4};
+		int[] row4 = {-1,-1,-1,+2,-1,-1,+8,-1,+1};
+		int[] row5 = {+5,+9,+1,-1,-1,-1,+3,+2,+6};
+		int[] row6 = {+6,-1,+2,+1,-1,-1,-1,-1,-1};
+		int[] row7 = {+8,-1,-1,-1,+3,+4,-1,+5,+9};
+		int[] row8 = {+9,-1,+7,-1,+2,-1,-1,-1,-1};
+		int[] row9 = {-1,-1,+5,-1,+1,+9,+4,+7,-1};
 		
 		//TWO TURN
 		int[] row11 = {+9,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -63,10 +66,17 @@ public class App {
 	}
 
 	public static void callSolveRowBased(Grid a, Grid b, RowUtils abc){
-		abc.solveRowBased(a);
+		
+//		System.out.println(abc.solveRowBased(a).get(0));
+//		a.print();
+//		System.out.println(abc.solveRowBased(a).size());
+		
+//		listAuslesen(allGrids);
+		listAuslesen(abc.solveRowBased(a));
+//		System.out.println(abc.solveRowBased(a).toString());
 	}
 	
-	public static void callGridUtils3(Grid a, Grid b, GridUtils3 cba){
+	public void callGridUtils3(Grid a, Grid b, GridUtils3 cba){
 		a.print();
 		System.out.println("");
 //		b.print();
@@ -81,7 +91,7 @@ public class App {
 //		System.out.println("isGridTurn: " + cba.isGridTurn(a, b));
 	}
 		
-	public static void callRowUtils(Grid a, Grid b, RowUtils abc){
+	public void callRowUtils(Grid a, Grid b, RowUtils abc){
 		a.print();
 		System.out.println("");
 //		b.print();
@@ -123,8 +133,8 @@ public class App {
 //		System.out.println("isRowValuePermutation: "+abc.isRowValuePermutation(a, b, a.getCell(1, 1)));
 //		System.out.println("getRowWhiteSpaces: " + abc.getRowWhiteSpaces(a, a.getCell(1, 1)));
 //		
-//		System.out.println("getRowMinimalHiddenPairCells: ");
-//		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(9, 1)));
+		System.out.println("getRowMinimalHiddenPairCells: ");
+		auslesen(abc.getRowMinimalHiddenPairCells(a, a.getCell(1, 1)));
 //		
 //		System.out.println("isRowMinimalHiddenPairCell: " + abc.isRowWithHiddenPairCells(a, a.getCell(9, 1)));
 	}
@@ -136,7 +146,7 @@ public class App {
 		}
 	}
 	
-	public static void auslesen(int[] a){
+	public void auslesen(int[] a){
 		if(a == null){
 			System.out.println("null");
 		}else{
@@ -147,7 +157,7 @@ public class App {
 		System.out.println("");
 	}
 	
-	public static void auslesen(Cell[] a){
+	public void auslesen(Cell[] a){
 		if(a[0] == null || a[1] == null){
 			System.out.println("null");
 		}else{
@@ -157,6 +167,14 @@ public class App {
 			}
 		}
 		
+	}
+	
+	public static void listAuslesen(List<Grid> list){
+		for(int i = 0; i < list.size(); i++){
+			list.get(i).print();
+			System.out.println("");
+		}
+		System.out.println("");
 	}
 	
 	
@@ -170,6 +188,39 @@ public class App {
 //	int[] row7 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+//	
+//	//LÖSBARES LEICHTES SUDOKU
+//	int[] row1 = {-1,+5,+9,+3,+7,-1,+1,-1,-1};
+//	int[] row2=  {-1,-1,-1,-1,+4,-1,+5,-1,+7};
+//	int[] row3 = {+7,+2,-1,+8,+5,-1,-1,-1,+4};
+//	int[] row4 = {-1,-1,-1,+2,-1,-1,+8,-1,+1};
+//	int[] row5 = {+5,+9,+1,-1,-1,-1,+3,+2,+6};
+//	int[] row6 = {+6,-1,+2,+1,-1,-1,-1,-1,-1};
+//	int[] row7 = {+8,-1,-1,-1,+3,+4,-1,+5,+9};
+//	int[] row8 = {+9,-1,+7,-1,+2,-1,-1,-1,-1};
+//	int[] row9 = {-1,-1,+5,-1,+1,+9,+4,+7,-1};
+//	
+//	//LÖSBARES LEICHTES SUDOKU LÖSUNG
+//	[4, 5, 9, 3, 7, 6, 1, 8, 2]
+//	[1, 6, 8, 9, 4, 2, 5, 3, 7]
+//	[7, 2, 3, 8, 5, 1, 9, 6, 4]
+//	[3, 7, 4, 2, 6, 5, 8, 9, 1]
+//	[5, 9, 1, 4, 8, 7, 3, 2, 6]
+//	[6, 8, 2, 1, 9, 3, 7, 4, 5]
+//	[8, 1, 6, 7, 3, 4, 2, 5, 9]
+//	[9, 4, 7, 5, 2, 8, 6, 1, 3]
+//	[2, 3, 5, 6, 1, 9, 4, 7, 8]
+//		
+//	//LÖSBARES SUDOKU SEHR SCHWER
+//	int[] row1 = {-1,-1,-1,+4,-1,+1,-1,-1,-1};
+//	int[] row2=  {+1,-1,+6,-1,-1,-1,+4,-1,+7};
+//	int[] row3 = {-1,-1,-1,-1,+9,-1,-1,-1,-1};
+//	int[] row4 = {+6,-1,+8,-1,-1,-1,+2,-1,+9};
+//	int[] row5 = {-1,-1,-1,-1,+6,-1,-1,-1,-1};
+//	int[] row6 = {+3,-1,+9,-1,-1,-1,+5,-1,+6};
+//	int[] row7 = {-1,-1,-1,-1,+1,-1,-1,-1,-1};
+//	int[] row8 = {+4,-1,+2,-1,-1,-1,+7,-1,+1};
+//	int[] row9 = {-1,-1,-1,+6,-1,+4,-1,-1,-1};
 //	
 //	//ONE HIDDEN PAIR
 //	int[] row1 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
