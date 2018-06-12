@@ -13,7 +13,7 @@ public class GridUtils3 implements GridUtil3{
 	/**
 	 *   Führt eine Rechtsdrehung auf grid aus. 
 	 *   
-	 * @param grid: Grid auf dem die Rechtsdrehung durchgeführt werden soll
+	 * @param grid Grid auf dem die Rechtsdrehung durchgeführt werden soll
 	 */
 	public void turnRight(Grid grid) {
 		//RAUSSCHREIBEN DER ROWS IN EINE LINKED LIST
@@ -49,9 +49,9 @@ public class GridUtils3 implements GridUtil3{
 	 *  falls ja, wird true zurückgegeben, sonst false.
 	 *  Die Identität (also das Nichtverändern des Gitters) wird als vierfache Rechtsdrehung angesehen.  
 	 *   
-	 * @param grid1: Das "Ursprungs" Grid, von dem ermittelt wird, ob grid2 durch eine Drehung dieses entstanden ist.
-	 * @param grid2: Das möglicherweise aus einer Drehung des grid1 entstandene grid.
-	 * @return boolean: true, falls grid2 aus einer Drehung des grid1 entstanden ist. False, falls nicht.
+	 * @param grid1 Das "Ursprungs" Grid, von dem ermittelt wird, ob grid2 durch eine Drehung dieses entstanden ist.
+	 * @param grid2 Das möglicherweise aus einer Drehung des grid1 entstandene grid.
+	 * @return boolean true, falls grid2 aus einer Drehung des grid1 entstanden ist. False, falls nicht.
 	 */
 	public boolean isGridTurn(Grid grid1, Grid grid2) {
 		if(getGridTurnNumber(grid1, grid2) != 99){
@@ -65,8 +65,8 @@ public class GridUtils3 implements GridUtil3{
 	 *  Hilfsmethode für die MEthode getGridTurnNumber, welches ein array übernimmt und dieses von hinten nach vorne wieder auffüllt.  
 	 *  Was vorher 1-9 war, ist nun 9-1.
 	 *   
-	 * @param a: ein int Array, welches mit Zahlen gefüllt ist.
-	 * @return aTemp: Das "umgedrehte" a Array
+	 * @param a ein int Array, welches mit Zahlen gefüllt ist.
+	 * @return aTemp Das "umgedrehte" a Array
 	 */
 	public static int[] insideOut(int[] a){		
 		int[] aTemp = new int[a.length];
@@ -83,11 +83,11 @@ public class GridUtils3 implements GridUtil3{
 	 *  Hilfsmethode für die MEthode getGridTurnNumber, welche ermittelt, ob eine vorherige Reihe durch gewisse Anzahl an Drehungen zu einer Column wurde.
 	 *  Beispielsweise durch eine Drehung um 1 oder 3
 	 *   
-	 * @param a: das "Ursprungs" Grid
-	 * @param b: das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
-	 * @param insideOut: "Dummy Variable". =1, falls die geprüfte Column durch die Methode InsideOut laufen musste, so beispielsweise bei einer Drehung von 3.
+	 * @param a das "Ursprungs" Grid
+	 * @param b das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
+	 * @param insideOut "Dummy Variable". =1, falls die geprüfte Column durch die Methode InsideOut laufen musste, so beispielsweise bei einer Drehung von 3.
 	 * 					 =0 bei einer Drehung von 1
-	 * @return boolean: true, falls die Drehung der übergebenen Reihe (Reihe durch Dummy Variable InsideOut festgelegt) bestätigt werden konnte.
+	 * @return boolean true, falls die Drehung der übergebenen Reihe (Reihe durch Dummy Variable InsideOut festgelegt) bestätigt werden konnte.
 	 */
 	public static boolean checkCol(Grid a, Grid b, int insideOut){
 		
@@ -158,11 +158,11 @@ public class GridUtils3 implements GridUtil3{
 	 *  Hilfsmethode für die Methode getGridTurnNumber, welche ermittelt, ob eine vorherige Reihe durch gewisse Anzahl an Drehungen zu einer Reihe wurde.
 	 *  Beispielsweise durch eine Drehung um 2 oder 0 bzw 4.
 	 *   
-	 * @param a: das "Ursprungs" Grid
-	 * @param b: das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
-	 * @param insideOut: "Dummy Variable". =1, falls die geprüfte Reihe durch die Methode InsideOut laufen musste, so beispielsweise bei einer Drehung von 2.
+	 * @param a das "Ursprungs" Grid
+	 * @param b das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
+	 * @param insideOut "Dummy Variable". =1, falls die geprüfte Reihe durch die Methode InsideOut laufen musste, so beispielsweise bei einer Drehung von 2.
 	 * 					 =0 bei einer Drehung von 0 bzw 4
-	 * @return boolean: true, falls die Drehung der übergebenen Reihe (Reihe durch Dummy Variable InsideOut festgelegt) bestätigt werden konnte.
+	 * @return boolean true, falls die Drehung der übergebenen Reihe (Reihe durch Dummy Variable InsideOut festgelegt) bestätigt werden konnte.
 	 */
 	public static boolean checkRow(Grid a, Grid b, int insideOut){
 		
@@ -234,9 +234,9 @@ public class GridUtils3 implements GridUtil3{
 	 *   Zulässige Rückgabewerte liegen zwischen 0 und 3.
 	 *   Es werden nur Fälle betrachtet, in denen grid2 durch eine feste Anzahl an Drehungen aus grid1 entstanden ist.
 	 *   
-	 * @param grid1: das "Ursprungs" Grid
-	 * @param grid2: das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
-	 * @return answer: die Zahl, um welche grid1 gedreht wurde, sodass grid1 entstand. Returnt 99, falls grid2 nicht durch eine Drehung von grid1 entstand.
+	 * @param grid1 das "Ursprungs" Grid
+	 * @param grid2 das Grid, welches überprüft wird, ob es durch eine Drehung aus grid1 bzw hier a, entstand.
+	 * @return answer die Zahl, um welche grid1 gedreht wurde, sodass grid1 entstand. Returnt 99, falls grid2 nicht durch eine Drehung von grid1 entstand.
 	 */
 	public int getGridTurnNumber(Grid grid1, Grid grid2) {
 		
