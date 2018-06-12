@@ -11,7 +11,7 @@ public interface RowSolvingUtil {
 	/**
 	* Beinhaltet hilfreiche Methoden,
 	* um Sudokus loesen zu koennen.
-	* Die Methoden beziehen sich auf die Einheit ’Row’.
+	* Die Methoden beziehen sich auf die Einheit Row.
 	*/
 	
 	//Feasibility and Whitespaces

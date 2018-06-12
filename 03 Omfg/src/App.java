@@ -16,7 +16,7 @@ public class App {
 		int[] rImage = {2,3,1};
 		int[] vImage = {9,8,7,6,5,4,3,2,1};
 		
-		//LÖSBARES LEICHTES SUDOKU
+		//LoeSBARES LEICHTES SUDOKU
 		int[] row1 = {-1,+5,+9,+3,+7,-1,+1,-1,-1};
 		int[] row2=  {-1,-1,-1,-1,+4,-1,+5,-1,+7};
 		int[] row3 = {+7,+2,-1,+8,+5,-1,-1,-1,+4};
@@ -190,7 +190,7 @@ public class App {
 //	int[] row8 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	int[] row9 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 //	
-//	//LÖSBARES LEICHTES SUDOKU
+//	//LoeSBARES LEICHTES SUDOKU
 //	int[] row1 = {-1,+5,+9,+3,+7,-1,+1,-1,-1};
 //	int[] row2=  {-1,-1,-1,-1,+4,-1,+5,-1,+7};
 //	int[] row3 = {+7,+2,-1,+8,+5,-1,-1,-1,+4};
@@ -201,7 +201,7 @@ public class App {
 //	int[] row8 = {+9,-1,+7,-1,+2,-1,-1,-1,-1};
 //	int[] row9 = {-1,-1,+5,-1,+1,+9,+4,+7,-1};
 //	
-//	//LÖSBARES LEICHTES SUDOKU LÖSUNG
+//	//LoeSBARES LEICHTES SUDOKU LoeSUNG
 //	[4, 5, 9, 3, 7, 6, 1, 8, 2]
 //	[1, 6, 8, 9, 4, 2, 5, 3, 7]
 //	[7, 2, 3, 8, 5, 1, 9, 6, 4]
@@ -212,7 +212,7 @@ public class App {
 //	[9, 4, 7, 5, 2, 8, 6, 1, 3]
 //	[2, 3, 5, 6, 1, 9, 4, 7, 8]
 //		
-//	//LÖSBARES SUDOKU SEHR SCHWER
+//	//LoeSBARES SUDOKU SEHR SCHWER
 //	int[] row1 = {-1,-1,-1,+4,-1,+1,-1,-1,-1};
 //	int[] row2=  {+1,-1,+6,-1,-1,-1,+4,-1,+7};
 //	int[] row3 = {-1,-1,-1,-1,+9,-1,-1,-1,-1};

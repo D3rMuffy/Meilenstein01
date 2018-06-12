@@ -5,9 +5,9 @@ import data.Grid;
 
 public interface RowIsoUtil {
 	/*
-	*Beinhaltet hilfreiche Methoden,
+	* Beinhaltet hilfreiche Methoden,
 	* um mit zueinander isomorphen Sudokus zu arbeiten. 
-	* Methoden beziehen sich auf die Einheit ’Row’ (also Zeile). 
+	* Methoden beziehen sich auf die Einheit Row (also Zeile). 
 	*/
 	
 	//BlockInternRow
