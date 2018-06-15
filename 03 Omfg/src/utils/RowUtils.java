@@ -809,7 +809,6 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	int[] foundHiddenRow = {0,0,0,0,0,0,0,0,0};
 	
 	List<Grid> changes = new LinkedList<Grid>();
-	Grid[] changesArray = new Grid[12];
 	int arrayIndex = 0;
 	
 	/**
@@ -824,9 +823,16 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		if(updateChangedSomething == false){
 			updateAllCandidates(grid);
 		}
-
-		changes.add(grid);		
 		
+		Grid temp = new Grid(grid.getRowValues(1).length);
+		for(int rIndex = 0; rIndex < grid.getRowValues(1).length; rIndex++){
+			for(int cIndex = 0; cIndex < grid.getColValues(1).length; cIndex++){
+				
+				temp.setValue(rIndex+1, cIndex+1, grid.getValue(rIndex+1, cIndex+1));
+			}
+		}
+		changes.add(temp);
+
 		boolean step1 = step1(grid);
 		
 		label:if(step1 == true){
@@ -863,6 +869,13 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		return changes;
 	}
 	
+	private void auslesen(Grid[] a) {
+		for(int i = 0; i < a.length; i++){
+			System.out.println(a[i]);
+		}
+		
+	}
+
 	/**
 	 *   Durchlaeuft fuer jede Zelle des Grids, die moeglichen Kandidaten und speichert diese in die LinkedList allCandidateArray. 
 	 *   
