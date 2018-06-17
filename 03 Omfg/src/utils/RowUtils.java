@@ -868,13 +868,6 @@ public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 		}
 		return changes;
 	}
-	
-	private void auslesen(Grid[] a) {
-		for(int i = 0; i < a.length; i++){
-			System.out.println(a[i]);
-		}
-		
-	}
 
 	/**
 	 *   Durchlaeuft fuer jede Zelle des Grids, die moeglichen Kandidaten und speichert diese in die LinkedList allCandidateArray. 
