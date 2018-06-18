@@ -8,7 +8,7 @@ import data.Grid;
 
 
 /**
- * @author Christoph Teichmeister
+ * @author Teichmeister, Christoph
  */
 public class RowUtils implements RowIsoUtil, RowSolvingUtil{
 	
